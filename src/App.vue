@@ -5,7 +5,8 @@
       <span v-if="isLogin">
         <router-link to="/movie/1/">1번 영화</router-link> |
         <router-link to="/recommend/">추천</router-link> |
-        <router-link to="/profile/a/">a 유저 프로필</router-link>
+        <router-link to="/profile/a/">a 유저 프로필</router-link> |
+        <router-link to="#" @click.native="logout">Log Out</router-link>
       </span>
       <span v-else>
         <router-link to="/accounts/signup/">Signup</router-link> |
@@ -13,7 +14,7 @@
       </span>
     </div>
     
-    <router-view/>
+    <router-view @login="setLogin"/>
   </div>
 </template>
 
