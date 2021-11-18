@@ -1,32 +1,37 @@
 <template>
   <div>
     <h1>Home</h1>
-
+    <!-- backdrop_path -->
+    <!-- https://image.tmdb.org/t/p/original/oE6bhqqVFyIECtBzqIuvh6JdaB5.jpg -->
     <div>
       1등 영화(크게)
       이미지
 
     </div>
     
+    <!-- poster_path -->
+    <!-- https://image.tmdb.org/t/p/w500/14L4NGrqO4r7gJtVRiSRP5rNsL5.jpg -->
     <div>
-      <h3>지금 뜨는 영화(가로)(2등부터)</h3> 
-      <movie-list :show-movie-list="popular"></movie-list>
-      
+      <h3>지금 뜨는 영화(가로)(2등부터)</h3>
+      <popular-movies></popular-movies>
     </div>
     <div>
       <h3>평점이 높은 영화(가로)</h3>
-      <movie-list></movie-list>
+      <top-rated-movies></top-rated-movies>
     </div>
     <div>
       <h3>장르별 영화(가로)</h3>
-      <movie-list></movie-list>
+      <genre-movies></genre-movies>
     </div>
   </div>
 </template>
 
 <script>
-import MovieList from '@/components/home/MovieList'
-import axios from 'axios'
+import popularMovies from '@/components/home/popularMovies'
+import topRatedMovies from '@/components/home/topRatedMovies'
+import genreMovies from '@/components/home/genreMovies'
+
+// import axios from 'axios'
 
 export default {
   name: 'Home',
@@ -36,25 +41,9 @@ export default {
     }
   },
   components: {
-    MovieList
+    popularMovies,
+    topRatedMovies,
+    genreMovies,
   },
-  created: function () {
-    axios({
-      method: 'get',
-      url: 'https://api.themoviedb.org/3/movie/popular',
-      params: {
-        api_key: '01558afb166c2eadee2e5d5648921e61',
-        language: 'ko-KR',
-        region: 'KR'
-      }
-    })
-    .then(res => {
-      console.log(res.data.results)
-      this.popular = res.data.results
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
 }
 </script>
