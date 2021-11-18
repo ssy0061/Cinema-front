@@ -4,7 +4,8 @@
     <div class="col-6">
       <div class="form-floating mb-3">
         <input 
-          type="text" id="username" class="form-control" 
+          type="text" id="username" 
+          class="form-control shadow-sm" 
           placeholder="ID"
           v-model="credentials.username"
         >
@@ -14,7 +15,7 @@
         <input 
           type="password" 
           id="password" 
-          class="form-control"
+          class="form-control shadow-sm"
           v-model="credentials.password"
           @keyup.enter="login"
           placeholder="비밀번호"
