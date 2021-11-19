@@ -28,7 +28,7 @@ export default {
     }
   },
   props: {
-    movieId: Number,
+    movieId: [Number, String],
   },
   methods: {
   },

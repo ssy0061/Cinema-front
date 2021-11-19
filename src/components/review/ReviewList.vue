@@ -26,7 +26,7 @@ export default {
     }
   },
   props: {
-    movieId: Number,
+    movieId: [Number, String],
     newReviewItem: Object,
   },
   methods: {
