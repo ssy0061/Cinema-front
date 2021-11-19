@@ -3,10 +3,14 @@
     <h3>리뷰 작성</h3>
     <textarea 
       name="" id="" cols="30" rows="10"
-      v-model="inputData"
-      @keyup.enter="createReview"
+      v-model="inputTxt"
     >
     </textarea>
+    <input 
+      type="number" name="" id=""
+      v-model="inputNum"
+      @keyup.enter="createReview"
+    >
     <button @click="createReview">작성</button>
     <i class="bi bi-star-fill"></i>
   </div>
@@ -20,7 +24,8 @@ export default {
   name: 'CreateReview',
   data: function () {
     return {
-      inputData: null,
+      inputTxt: null,
+      inputNum: null,
       ...mapState([
       'tmpReview',
       ])
@@ -39,13 +44,13 @@ export default {
     },
     createReview: function () {
       const reviewItem = {
-        content: this.inputData,
-        rated: 5,
+        content: this.inputTxt,
+        rated: this.inputNum,
       }
       if (reviewItem.content) {
         axios({
           method: 'post',
-          url: `http://127.0.0.1:8000/reviews/${this.movieId}/`,
+          url: `http://127.0.0.1:8000/reviews/movie/${this.movieId}/`,
           data: reviewItem,
           headers: this.setToken()
         })
@@ -56,7 +61,8 @@ export default {
         .catch(err => {
           console.log(err)
         })
-        this.inputData = null
+        this.inputTxt = null
+        this.inputNum = null
       }
     }
   },

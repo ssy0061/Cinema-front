@@ -41,11 +41,11 @@ export default {
       console.log(typeof(this.movieId))
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/reviews/${this.movieId}/`,
+        url: `http://127.0.0.1:8000/reviews/movie/${this.movieId}/`,
         headers: this.setToken()
       })
       .then(res => {
-        // console.log(res)
+        // console.log(res.data)
         this.reviews = res.data
       })
       .catch(err => {

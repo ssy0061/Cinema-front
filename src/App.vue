@@ -2,10 +2,14 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <span v-if="isLogin">
+      <span v-if="chk">
         <router-link to="/movie/1/">1번 영화</router-link> |
         <router-link to="/recommend/">추천</router-link> |
-        <router-link to="/profile/a/">a 유저 프로필</router-link> |
+        <router-link 
+          :to="{
+            name: 'Profile',
+            params: { username: loginUser.username }
+          }">내 프로필</router-link> |
         <router-link to="#" @click.native="logout">Log Out</router-link>
       </span>
       <span v-else>
@@ -19,30 +23,50 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+// import axios from 'axios'
+
 export default {
   name: 'App',
   data: function () {
     return {
-      isLogin: false,
+      chk: false,
     }
+  },
+  computed: {
+    ...mapState([
+      'isLogin',
+      'loginUser'
+    ])
   },
   methods: {
     setLogin: function () {
-      this.isLogin = true
+      // 유저 정보 가져오기
+      this.$store.dispatch('doLogin')
     },
     logout: function () {
       localStorage.removeItem('JWT')
-      this.isLogin = false
       this.$router.push({ name: 'Login' })
+      this.$store.dispatch('doLogout')
     }
   },
-  created: function () {
-    if (localStorage.getItem('JWT')) {
-      this.isLogin = true
-    } else {
-      this.isLogin = false
+  watch: {
+    loginUser: function () {
+      if (this.loginUser) {
+        this.chk = true
+      } else {
+        this.chk = false
+      }
     }
-  }
+  },
+  // created: function () {
+  //   if (localStorage.getItem('JWT')) {
+  //     this.chk = true
+  //   } else {
+  //     this.chk = false
+  //   }
+  // }
 }
 </script>
 

@@ -31,6 +31,7 @@ import popularMovies from '@/components/home/popularMovies'
 import topRatedMovies from '@/components/home/topRatedMovies'
 import genreMovies from '@/components/home/genreMovies'
 
+
 // import axios from 'axios'
 
 export default {
