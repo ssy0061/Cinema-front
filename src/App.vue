@@ -3,7 +3,6 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <span v-if="chk">
-        <router-link to="/movie/1/">1번 영화</router-link> |
         <router-link to="/recommend/">추천</router-link> |
         <router-link 
           :to="{
@@ -60,13 +59,11 @@ export default {
       }
     }
   },
-  // created: function () {
-  //   if (localStorage.getItem('JWT')) {
-  //     this.chk = true
-  //   } else {
-  //     this.chk = false
-  //   }
-  // }
+  created: function () {
+    if (localStorage.getItem('JWT')) {
+      this.$store.dispatch('refresh')
+    }
+  }
 }
 </script>
 

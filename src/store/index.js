@@ -16,7 +16,6 @@ export default new Vuex.Store({
       const config = {
           Authorization: `Bearer ${token}`
       }
-      console.log(state.isLogin)
       if (token) {
         axios({
           method: 'get',
@@ -24,7 +23,6 @@ export default new Vuex.Store({
           headers: config
         })
         .then(res => {
-          console.log(res.data)
           state.loginUser = res.data
         })
         .catch(err => {
@@ -40,7 +38,7 @@ export default new Vuex.Store({
       state.isLogin = false
       state.loginUser = null
       // console.log(state.loginUser)
-    }
+    },
   },
   actions: {
     getLoginUser: function ({commit}) {
@@ -54,6 +52,10 @@ export default new Vuex.Store({
     doLogout: function({commit}) {
       commit('DO_LOGOUT')
     },
+    refresh: function ({commit}) {
+      commit('DO_LOGIN')
+      commit('GET_LOGIN_USER')
+    }
   },
   modules: {
   }
