@@ -23,7 +23,7 @@ export default {
     }
   },
   props: {
-    movieId: Number,
+    movieId: [Number, String],
   },
   methods: {
     newReview: function (data) {

@@ -24,7 +24,6 @@ export default {
     Review
   },
   created: function () {
-    console.log(typeof(this.$route.params.movieId))
     this.movieId = this.$route.params.movieId
   }
 }

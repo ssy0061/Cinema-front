@@ -63,10 +63,14 @@ export default {
         url: `http://127.0.0.1:8000/accounts/${this.user.id}/follow/`,
         headers: config
       })
-      .then(res => {
-        console.log(res)
-        this.getProfileUser()
-        this.$store.dispatch('getLoginUser')
+      .then(() => {
+        if (this.chk) {
+          this.chk = false
+          this.user.followers_cnt -= 1
+        } else {
+          this.chk = true
+          this.user.followers_cnt += 1
+        }
       })
       .catch(err => {
         console.log(err)
@@ -89,17 +93,16 @@ export default {
         headers: this.setToken()
       })
       .then(res => {
-        // console.log('프로필 유저')
-        // console.log(res.data)
         this.user = res.data
-        this.getUserReview()
 
         // follow <-> unfollow 버튼 변경
-        if (this.chk) {
-          this.chk = false
+        if (this.loginUser.in in this.user.followings) {
+          this.chk = true
         } else {
-          this.chk =true
+          this.chk = false
         }
+
+          this.getUserReview()
       })
       .catch(err => {
         console.log(err)
@@ -113,7 +116,6 @@ export default {
         headers: this.setToken()
       })
       .then(res => {
-        // console.log(res.data)
         this.reviews = res.data
       })
       .catch(err => {
