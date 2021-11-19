@@ -1,22 +1,28 @@
 <template>
-  <div v-if="user">
-    <h3>{{ user.username }}'s 프로필</h3>
-    <div>
-      <span>점수: {{ user.curr_point }} / {{ user.acc_point }}</span><span>  </span>
-      <p>팔로잉: {{ user.followings_cnt }}, 팔로워: {{ user.followers_cnt }}</p>
+  <div>
+    <div v-if="user">
+      <h3>{{ user.username }}'s 프로필</h3>
+      <div>
+        <span>점수: {{ user.curr_point }} / {{ user.acc_point }}</span><span>  </span>
+        <p>팔로잉: {{ user.followings_cnt }}, 팔로워: {{ user.followers_cnt }}</p>
+      </div>
+      <div v-if="loginUser.username !== user.username">
+        <div v-if="chk">
+          <button class="btn btn-danger" @click="follow">언팔로우</button>
+        </div>
+        <div v-else>
+          <button class="btn btn-primary" @click="follow">팔로우</button>
+        </div>
+      </div>
     </div>
-    <div v-if="loginUser.username !== user.username">
-      {{user.id in loginUser.followings}}
-      <div v-if="user.id in loginUser.followings">
 
-        <button class="btn btn-danger" @click="follow">언팔로우</button>
-      </div>
-      <div v-else>
-        <button class="btn btn-primary" @click="follow">팔로우</button>
-      </div>
-    </div>
-    <div>
+    <hr>
+
+    <div v-if="reviews">
       <h4>작성한 리뷰(영화)</h4>
+      <!-- <img :src="posterUrl" alt="포스터" width="300px"> -->
+      <p>리뷰: {{ reviews }}</p>
+      
     </div>
     
   </div>
@@ -31,7 +37,10 @@ export default {
   name: 'Profile',
   data: function () {
     return {
+      chk: null,
       user: null,
+      reviews: null,
+      // url: `http://127.0.0.1:8000/movies/${this.reviews.movie.poster_path}/`
     }
   },
   computed: {
@@ -80,28 +89,44 @@ export default {
         headers: this.setToken()
       })
       .then(res => {
-        console.log('프로필 유저')
-        console.log(res.data)
+        // console.log('프로필 유저')
+        // console.log(res.data)
         this.user = res.data
+        this.getUserReview()
+
+        // follow <-> unfollow 버튼 변경
+        if (this.chk) {
+          this.chk = false
+        } else {
+          this.chk =true
+        }
       })
       .catch(err => {
         console.log(err)
       })
     },
-    getLoginUser: function () {
+    getUserReview: function () {
       // profile 유저의 리뷰(영화) 정보 가져오기
-      console.log('로그인 유저')
-      console.log(this.loginUser)
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/reviews/user/${this.user.id}/`,
+        headers: this.setToken()
+      })
+      .then(res => {
+        // console.log(res.data)
+        this.reviews = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   },
   created: function () {
     this.getProfileUser()
-    this.getLoginUser()
   },
   watch: {
     paramsUserName: function () {
       this.getProfileUser()
-      this.getLoginUser()
     }
   }
 
