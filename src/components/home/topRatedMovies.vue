@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="movies">
     <h3>toprated</h3>
     <movie-card :movies="movies"></movie-card>
   </div>
@@ -26,7 +26,6 @@ export default {
       url: 'http://127.0.0.1:8000/movies/top_rated/',
     })
     .then(res => {
-      console.log(res.data)
       this.movies = res.data
     })
     .catch(err => {

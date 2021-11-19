@@ -35,11 +35,6 @@ import genreMovies from '@/components/home/genreMovies'
 
 export default {
   name: 'Home',
-  data: function () {
-    return {
-      popular: '',
-    }
-  },
   components: {
     popularMovies,
     topRatedMovies,

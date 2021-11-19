@@ -1,8 +1,9 @@
 <template>
   <div>
     <h2>리뷰</h2>
-    <review-list></review-list>
-    <create-review></create-review>
+    
+    <review-list :movie-id="movieId" :new-review-item="newReviewItem"></review-list>
+    <create-review :movie-id="movieId" @new-review="newReview"></create-review>
   </div>
 </template>
 
@@ -15,6 +16,19 @@ export default {
   components: {
     ReviewList,
     CreateReview
+  },
+  data: function () {
+    return {
+      newReviewItem: null,
+    }
+  },
+  props: {
+    movieId: Number,
+  },
+  methods: {
+    newReview: function (data) {
+      this.newReviewItem = data
+    }
   }
 }
 </script>

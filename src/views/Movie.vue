@@ -3,7 +3,7 @@
     <h2>영화</h2>
     <div class="container-fluid row">
       <movie-detail class="col-8" :movie-id="movieId"></movie-detail>
-      <review class="col-4"></review>
+      <review class="col-4" :movie-id="movieId"></review>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
     Review
   },
   created: function () {
+    console.log(typeof(this.$route.params.movieId))
     this.movieId = this.$route.params.movieId
   }
 }
