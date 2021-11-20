@@ -1,8 +1,11 @@
 <template>
   <div v-if="genresIds">
-    <h3>genre</h3>
-    <div v-for="genre in genresIds" :key="genre.id">
-      <genre-movies-item :genre-id="genre.id" :genre-name="genre.name"></genre-movies-item>
+    <div>
+      <genre-movies-item 
+        v-for="genre in genresIds" 
+        :key="genre.id" 
+        :genre="genre" 
+      ></genre-movies-item>
     </div>
   </div>
 </template>
@@ -17,7 +20,6 @@ export default {
   data: function () {
     return {
       genresIds: null,
-      
     }
   },
   components: {

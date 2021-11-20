@@ -106,7 +106,7 @@ export default {
         this.user = res.data
 
         // follow <-> unfollow 버튼 변경
-        if (this.loginUser.in in this.user.followings) {
+        if(this.loginUser.followings.find(id => this.user.id === id)) {
           this.chk = true
         } else {
           this.chk = false

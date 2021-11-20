@@ -1,24 +1,48 @@
 <template>
-  <div v-if="movies">
-    <h3>popular</h3>
-    <movie-card :movies="movies"></movie-card>
+  <div class="container-div">
+    <h3 class="movie-list-title">popular</h3>
+    <swiper class="swiper" :options="swiperOption" v-if="movies">
+      <swiper-slide v-for="movie in movies" :key="movie.id">
+        <movie-card :movie="movie"></movie-card>
+      </swiper-slide>
+      <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+      <div class="swiper-button-prev" slot="button-prev"></div> 
+      <div class="swiper-button-next" slot="button-next"></div>
+    </swiper>
   </div>
 </template>
 
 <script>
 import movieCard from '@/components/home/movieCard'
-
 import axios from 'axios'
+
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 export default {
   name: 'popularMovies',
   data: function () {
     return {
-      movies: '',
+      movies: null,
+      swiperOption: { 
+        slidesPerView: 6, 
+        spaceBetween: 0, 
+        loop: true, 
+        pagination: { 
+          el: '.swiper-pagination', 
+          clickable: true 
+        }, 
+        navigation: { 
+          nextEl: '.swiper-button-next', 
+          prevEl: '.swiper-button-prev' 
+        } 
+      }
     }
   },
   components: {
-    movieCard
+    movieCard,
+    Swiper,
+    SwiperSlide,
   },
   created: function () {
     axios({
@@ -35,6 +59,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scope>
+.container-div {
+  padding: 30px;
+}
+.movie-list-title {
+  text-align: left;
+  color: gray;
+  font-size: 30px;
+}
 </style>
