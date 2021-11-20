@@ -18,10 +18,15 @@
 
     <hr>
 
-    <div v-if="reviews">
+    <div v-if="reviews" class="row justify-content-around">
       <h4>작성한 리뷰(영화)</h4>
       <!-- <img :src="posterUrl" alt="포스터" width="300px"> -->
-      <p>리뷰: {{ reviews }}</p>
+      <review-card
+        v-for="review in reviews" 
+        :key="review.id"
+        :review="review"
+      >
+      </review-card>
       
     </div>
     
@@ -29,12 +34,17 @@
 </template>
 
 <script>
+import ReviewCard from '@/components/review/ReviewCard'
+
 import { mapState } from 'vuex'
 
 import axios from 'axios'
 
 export default {
   name: 'Profile',
+  components: {
+    ReviewCard
+  },
   data: function () {
     return {
       chk: null,
