@@ -8,7 +8,12 @@
 
     </div>
     <div>
-      
+      <span 
+        v-for="genre in movie.genres" 
+        :key="genre.id"
+        class="mx-2"
+      >
+      {{ genre.name }}</span>
       <h4>{{ movie.title }} ( {{ releaseDate }} ) <i class="bi bi-123"></i> {{ movie.vote_average }}</h4>
       <p>줄거리: {{ movie.overview }}</p>
     </div>

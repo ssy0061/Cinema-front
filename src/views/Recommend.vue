@@ -1,29 +1,30 @@
 <template>
   <div>
     <h3>추천</h3>
-    <div>
-      <review-list-item
-        v-for="(review, index) in reviews"
-        :key="index"
+    <div v-if="reviews" class="row">
+      <review-card
+        v-for="review in reviews" 
+        :key="review.id"
         :review="review"
-      ></review-list-item>
+      >
+      </review-card>
     </div>
   </div>
 </template>
 
 <script>
-import ReviewListItem from "@/components/review/ReviewListItem"
+import ReviewCard from '@/components/review/ReviewCard'
 import axios from "axios"
 
 export default {
   name: "Recommend",
+  components: {
+    ReviewCard
+  },
   data: function () {
     return {
       reviews: null,
     }
-  },
-  components: {
-    ReviewListItem,
   },
   methods: {
     setToken: function () {
