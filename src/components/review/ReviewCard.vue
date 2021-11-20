@@ -77,7 +77,8 @@ export default {
         } else {
           this.chk = false
         }
-    this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.poster_path}`
+    this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.backdrop_path}`
+    // this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.poster_path}`
     const data = this.review.movie.release_date.split('-')
     this.releaseDate = `${data[0]}. ${data[1]}`
   }

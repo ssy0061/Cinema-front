@@ -17,7 +17,7 @@
       </span>
     </div>
     
-    <router-view @login="setLogin"/>
+    <router-view @login="setLogin" class="app-view"/>
   </div>
 </template>
 
@@ -69,6 +69,10 @@ export default {
 
 
 <style>
+.app-view {
+  width: 1600px;
+  margin: 0 auto;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
