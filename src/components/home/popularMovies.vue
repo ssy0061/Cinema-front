@@ -1,7 +1,12 @@
 <template>
   <div v-if="movies">
-    <div @click="goDetail(movies[0].id)">
+    <div @click="goDetail(movies[0].id)" class="pop-movie">
       <img :src="`https://image.tmdb.org/t/p/original/${movies[0].backdrop_path}`" alt="배경 사진" class="most-pop-img">
+      <div class="pop-movie-desc">
+        <h1>{{movies[0].title}}</h1>
+        <p>{{genreStr}}</p>
+        <star-rating :rating="3.8" :read-only="true" :increment="0.01" :star-size="20"></star-rating>
+      </div>
     </div>
     <div class="container-div">
       <h3 class="movie-list-title">POPULAR</h3>
@@ -24,11 +29,14 @@ import axios from 'axios'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
+import StarRating from 'vue-star-rating'
+
 export default {
   name: 'popularMovies',
   data: function () {
     return {
       movies: null,
+      popMovie: null,
       swiperOption: { 
         slidesPerView: 6, 
         spaceBetween: 0, 
@@ -48,10 +56,20 @@ export default {
     movieCard,
     Swiper,
     SwiperSlide,
+    StarRating,
   },
   methods: {
     goDetail: function (id) {
       this.$router.push({ name: 'Movie', params: { movieId: id }})
+    }
+  },
+  computed: {
+    genreStr: function () {
+      let tmp = ''
+      this.popMovie.genres.forEach(e => {
+        tmp = tmp +  e.name + ' '
+      })
+      return tmp
     }
   },
   created: function () {
@@ -61,6 +79,8 @@ export default {
     })
     .then(res => {
       this.movies = res.data
+      this.popMovie = res.data[0]
+      console.log(this.popMovie);
     })
     .catch(err => {
       console.log(err)
@@ -70,6 +90,16 @@ export default {
 </script>
 
 <style scope>
+.pop-movie {
+  position: relative;
+}
+.pop-movie-desc {
+  position: absolute;
+  bottom: 250px;
+  left: 50px;
+  color: #e5e5e5;
+  text-align: left;
+}
 .container-div {
   padding: 30px;
 }
