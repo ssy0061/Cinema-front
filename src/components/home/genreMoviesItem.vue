@@ -1,14 +1,16 @@
 <template>
-  <div class="container-div"  v-if="movies.length > 6">
-    <h3 class="movie-list-title">{{ genre.name }}</h3>
-    <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="movie in movies" :key="movie.id">
-        <movie-card :movie="movie"></movie-card>
-      </swiper-slide>
-      <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-      <div class="swiper-button-prev" slot="button-prev"></div> 
-      <div class="swiper-button-next" slot="button-next"></div>
-    </swiper>
+  <div v-if="movies">
+    <div class="container-div"  v-if="movies.length > 6">
+      <h3 class="movie-list-title">{{ genre.name }}</h3>
+      <swiper class="swiper" :options="swiperOption">
+        <swiper-slide v-for="movie in movies" :key="movie.id">
+          <movie-card :movie="movie"></movie-card>
+        </swiper-slide>
+        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+        <div class="swiper-button-prev" slot="button-prev"></div> 
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -65,8 +67,8 @@ export default {
 <style scope>
 /* .container-div {
   padding: 30px;
-}
-.movie-list-title {
+} */
+/* .movie-list-title {
   text-align: left;
   color: gray;
   font-size: 30px;

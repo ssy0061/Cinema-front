@@ -20,7 +20,7 @@ export default {
 
 <style>
   .poster {
-    box-shadow: 4px 4px 4px gray;
+    box-shadow: 2.5px 2.5px 2.5px rgba(255,255,255,.1);
     width: 250px;
     height: 366px;
   }

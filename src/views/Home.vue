@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Home</h1>
     <!-- backdrop_path -->
     <!-- https://image.tmdb.org/t/p/original/oE6bhqqVFyIECtBzqIuvh6JdaB5.jpg -->
     <div>
