@@ -6,7 +6,7 @@
         <h3 class="mb-0">리뷰 등록</h3>
       </div>
       <div class="card-body">
-        <star-rating class="custom-star mb-3" @rating-selected="getRating" :glow="5" :increment="0.5" :star-size="40" :clearable="true"></star-rating>
+        <star-rating class="custom-star mb-3" :rating="inputRating" @rating-selected="getRating" :glow="5" :increment="0.5" :star-size="40" :clearable="true"></star-rating>
         <p class="card-text text-light">별점을 선택해 주세요</p>
       </div>
       <div class="card-body">
@@ -58,6 +58,9 @@ export default {
         content: this.inputTxt,
         rated: this.inputRating * 2,
       }
+      if (!reviewItem.content) {
+        alert('감상평을 남겨주세요.')
+      }
       if (reviewItem.content) {
         axios({
           method: 'post',
@@ -72,6 +75,8 @@ export default {
         .catch(err => {
           console.log(err)
           // 이미 작성했으면 alert 알림창 띄우기
+          // (이미 작성한 경우인지 확인 필요)
+          alert('이미 리뷰를 작성한 영화입니다.')
         })
         this.inputTxt = null
         this.inputRating = null

@@ -4,9 +4,9 @@
       <div class="card border-secondary border-2 mb-3 text-white">
         <div class="card-header border-secondary border-1">
           <div class="container row" style="font-size: 1.5rem;">
-            <p class="col-2 mb-0" @click="goProfile">{{ review.user.username }}</p>
+            <p class="rink col-2 mb-0" @click="goProfile">{{ review.user.username }}</p>
             <star-rating class="col-8 mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
-            <div class="col-1 pe-0" @click="likesRivew">
+            <div class="rink col-1 pe-0" @click="likesRivew">
               <span v-if="liked">
                 <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }" size="lg"/>
               </span>

@@ -1,10 +1,10 @@
 <template>
   <div v-if="movie" class="text-light">
     <div>
-      <p class="my-2" style="font-size: 3rem;">{{ movie.title }}</p>
+      <p class="mt-2 mb-0" style="font-size: 3rem;">{{ movie.title }}</p>
 
     </div>
-    <hr>
+    <hr class="mt-0" style="height: 2px;">
     <div class="d-flex justify-content-around mx-5 px-5">
       <div class="mx-3">
         <img :src="posterUrl" alt="포스터" width="400px">
