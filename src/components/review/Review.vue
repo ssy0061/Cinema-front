@@ -1,11 +1,9 @@
 <template>
-  <div class="row">
-    <h2>리뷰</h2>
-    
-    <div class="col-2"></div>
-    <review-list class="col-4" :movie-id="movieId" :new-review-item="newReviewItem"></review-list>
+  <div class="row justify-content-around mx-5 px-5 my-5">
+    <h2 class="mb-5">리뷰</h2>
+    <review-list class="col-7 container mx-0" :movie-id="movieId" :new-review-item="newReviewItem"></review-list>
 
-    <create-review class="col-4" :movie-id="movieId" @new-review="newReview"></create-review>
+    <create-review class="col-5 container" :movie-id="movieId" @new-review="newReview"></create-review>
   </div>
 </template>
 

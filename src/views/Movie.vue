@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <div class="container-fluid row">
-      <movie-detail class="col-12" :movie-id="movieId"></movie-detail>
-      <review class="col-12" :movie-id="movieId"></review>
+  <div class="text-light">
+    <div class="container-fluid">
+      <movie-detail :movie-id="movieId"></movie-detail>
+      <hr>
+      <review :movie-id="movieId"></review>
     </div>
   </div>
 </template>
