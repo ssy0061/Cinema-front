@@ -1,20 +1,41 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <span v-if="chk">
-        <router-link to="/recommend/">추천</router-link> |
+      <router-link to="/"><img class="logo" src="@/assets/images/logo4.png" alt=""></router-link>
+      <div v-if="chk" class="navi">
+        <router-link to="/recommend/">추천</router-link> | 
         <router-link 
           :to="{
             name: 'Profile',
             params: { username: loginUser.username }
-          }">내 프로필</router-link> |
-        <router-link to="#" @click.native="logout">Log Out</router-link>
-      </span>
-      <span v-else>
-        <router-link to="/accounts/signup/">Signup</router-link> |
-        <router-link to="/accounts/login/">Login</router-link> |
-      </span>
+          }">내 프로필
+        </router-link> 
+      </div>
+      <div>
+        <span v-if="chk">
+          <router-link to="#" @click.native="logout">Log Out</router-link>
+        </span>
+        <span v-else>
+          <router-link to="/accounts/signup/">Signup</router-link> |
+          <router-link to="/accounts/login/">Login</router-link>
+        </span>
+      </div>
+      <!-- <div>
+        <span v-if="chk" class="navi">
+          <router-link to="/recommend/">추천</router-link> |
+          <router-link 
+            :to="{
+              name: 'Profile',
+              params: { username: loginUser.username }
+            }">내 프로필 |
+          </router-link> 
+          <router-link to="#" @click.native="logout">Log Out</router-link>
+        </span>
+        <span v-else>
+          <router-link to="/accounts/signup/">Signup</router-link> |
+          <router-link to="/accounts/login/">Login</router-link> |
+        </span>
+      </div> -->
     </div>
     
     <router-view @login="setLogin" class="app-view"/>
@@ -69,6 +90,9 @@ export default {
 
 
 <style>
+body {
+  background-color: #141414 !important;
+}
 .app-view {
   width: 1600px;
   margin: 0 auto;
@@ -82,12 +106,26 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  width: 200px;
+  margin: 10px 0 10px 30px;
+}
+.navi {
+  margin-left: -110px;
+  font-size: 20px;
+
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
