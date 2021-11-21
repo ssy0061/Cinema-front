@@ -1,17 +1,24 @@
 <template>
-  <div class="col-4">
+  <div class="col-4 d-flex justify-content-center">
     <div class="card text-white mb-4" style="width: 25rem;">
       <div class="card-header">
-        <span @click="goProfile" class="cursor-po">
-          {{ review.user.username }}
+        <span @click="goProfile">
+          <div class="cursor-po">
+            {{ review.user.username }}
+          </div>
           <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="12" :show-rating="false"></star-rating>
         </span>
-        <span @click="likesRivew" class="cursor-po">
-          <span v-if="chk">
-            <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/> {{likes_cnt}}
+        <span>
+          <span @click="likesRivew" class="cursor-po" style="font-size: 2rem">
+            <span v-if="chk">
+              <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+            </span>
+            <span v-else>
+              <font-awesome-icon :icon="['far', 'heart']"/>
+            </span>
           </span>
-          <span v-else>
-            <font-awesome-icon :icon="['far', 'heart']" /> {{likes_cnt}}
+          <span style="font-size: 1.5rem">
+            {{likes_cnt}}
           </span>
         </span>
       </div>
@@ -54,7 +61,12 @@ export default {
   },
   methods: {
     goProfile: function () {
-      this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+      // 리뷰 작성자가 프로필페이지 유저가 아닌 경우 이동
+      if (this.review.user.username !== this.$route.params.username ) {
+        this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+      } else {
+        console.log(`${this.review.user.username}의 프로필 페이지 입니다.`)
+      }
     },
     goDetail: function (id) {
       this.$router.push({ name: 'Movie', params: { movieId: id }})

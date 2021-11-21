@@ -35,3 +35,9 @@ export default {
   },
 }
 </script>
+
+<style>
+  .rink {
+    cursor: pointer;
+  }
+</style>
