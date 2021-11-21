@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="row">
     <h2>리뷰</h2>
     
-    <review-list :movie-id="movieId" :new-review-item="newReviewItem"></review-list>
-    <create-review :movie-id="movieId" @new-review="newReview"></create-review>
+    <div class="col-2"></div>
+    <review-list class="col-4" :movie-id="movieId" :new-review-item="newReviewItem"></review-list>
+
+    <create-review class="col-4" :movie-id="movieId" @new-review="newReview"></create-review>
   </div>
 </template>
 

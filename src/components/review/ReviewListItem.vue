@@ -1,7 +1,7 @@
 <template>
   <div class="my-3">
-    <div>
-      <div class="card border-dark mb-3 text-white bg-secondary" style="width: 100p;">
+    <div class="d-flex justify-content-center">
+      <div class="card border-dark mb-3 text-white" style="width: 1000px;">
         <div class="card-header">
           <div class="row">
             <h5 class="col-4 mb-0" @click="goProfile">{{ review.user.username }}</h5>
@@ -91,5 +91,7 @@ export default {
 </script>
 
 <style>
-
+.card {
+  background-color: #2f2f2f !important;
+}
 </style>

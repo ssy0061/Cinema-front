@@ -1,21 +1,24 @@
 <template>
-  <div v-if="movie">
+  <div v-if="movie" class="row">
     <h3>영화 detail</h3>
     <hr>
-    <div>
-      <img :src="posterUrl" alt="포스터" width="300px"> ////
-      <span>예고편 영상</span>
+    <div class="col-4 ms-5 ps-5">
+      <img :src="posterUrl" alt="포스터" width="400px">
 
     </div>
-    <div>
-      <span 
-        v-for="genre in movie.genres" 
-        :key="genre.id"
-        class="mx-2"
-      >
-      {{ genre.name }}</span>
-      <h4>{{ movie.title }} ( {{ releaseDate }} ) <i class="bi bi-123"></i> {{ movie.vote_average }}</h4>
-      <p>줄거리: {{ movie.overview }}</p>
+    <div class="col-6">
+      <div>예고편 영상</div>
+
+      <div>
+        <span 
+          v-for="genre in movie.genres" 
+          :key="genre.id"
+          class="mx-2"
+        >
+        {{ genre.name }}</span>
+        <h4>{{ movie.title }} ( {{ releaseDate }} ) {{ movie.vote_average }}</h4>
+        <p>줄거리: {{ movie.overview }}</p>
+      </div>
     </div>
   </div>
 </template>

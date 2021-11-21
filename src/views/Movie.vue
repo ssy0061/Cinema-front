@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h2>영화</h2>
     <div class="container-fluid row">
-      <movie-detail class="col-8" :movie-id="movieId"></movie-detail>
-      <review class="col-4" :movie-id="movieId"></review>
+      <movie-detail class="col-12" :movie-id="movieId"></movie-detail>
+      <review class="col-12" :movie-id="movieId"></review>
     </div>
   </div>
 </template>
