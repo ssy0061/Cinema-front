@@ -1,34 +1,31 @@
 <template>
   <div class="col-4">
-        
     <div class="card text-white mb-4" style="width: 25rem;">
       <div class="card-header">
-        <span @click="goProfile">
+        <span @click="goProfile" class="cursor-po">
           {{ review.user.username }}
-        </span> | 
-        평점(별점???) {{ review.movie.vote_average }} |
-        (리뷰 좋아요 수) {{ likes_cnt }} |
-        
-        <span @click="likesRivew">
+          <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="12" :show-rating="false"></star-rating>
+        </span>
+        <span @click="likesRivew" class="cursor-po">
           <span v-if="chk">
-            <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+            <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/> {{likes_cnt}}
           </span>
           <span v-else>
-            <font-awesome-icon :icon="['far', 'heart']" />
+            <font-awesome-icon :icon="['far', 'heart']" /> {{likes_cnt}}
           </span>
         </span>
       </div>
-      <img :src="posterUrl" alt="포스터" class="card-img-top" @click="goDetail(review.movie.id)">
+      <img :src="posterUrl" alt="포스터" class="card-img-top cursor-po" @click="goDetail(review.movie.id)">
       <div class="card-body">
         <h5 class="card-title">
           <span 
             @click="goDetail(review.movie.id)"
-          >{{ review.movie.title }} ( {{ releaseDate }} )
+            class="cursor-po"
+          >{{ review.movie.title }}
           </span></h5>
         <p class="card-text">{{ review.content }}</p>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -36,6 +33,8 @@
 import axios from 'axios'
 import getToken from '@/util/getToken.js'
 import { mapState } from 'vuex'
+
+import StarRating from 'vue-star-rating'
 
 export default {
   name: 'ReviewCard',
@@ -49,6 +48,9 @@ export default {
       likes_cnt: this.review.like_users.length,
       chk: null,
     }
+  },
+  components: {
+    StarRating,
   },
   methods: {
     goProfile: function () {
@@ -85,6 +87,7 @@ export default {
     ])
   },
   created: function () {
+    console.log(this.review)
     if(this.review.like_users.find(id => this.loginUser.id === id)) {
           this.chk = true
         } else {
@@ -101,5 +104,15 @@ export default {
 <style>
 .card {
   background-color: #2f2f2f !important;
+}
+.card-header {
+  
+  color: #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  }
+.card-body {
+  color: #e5e5e5;
 }
 </style>

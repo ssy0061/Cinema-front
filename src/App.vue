@@ -20,22 +20,6 @@
           <router-link to="/accounts/login/">Login</router-link>
         </span>
       </div>
-      <!-- <div>
-        <span v-if="chk" class="navi">
-          <router-link to="/recommend/">추천</router-link> |
-          <router-link 
-            :to="{
-              name: 'Profile',
-              params: { username: loginUser.username }
-            }">내 프로필 |
-          </router-link> 
-          <router-link to="#" @click.native="logout">Log Out</router-link>
-        </span>
-        <span v-else>
-          <router-link to="/accounts/signup/">Signup</router-link> |
-          <router-link to="/accounts/login/">Login</router-link> |
-        </span>
-      </div> -->
     </div>
     
     <router-view @login="setLogin" class="app-view"/>
@@ -44,8 +28,6 @@
 
 <script>
 import { mapState } from 'vuex'
-
-// import axios from 'axios'
 
 export default {
   name: 'App',
@@ -134,5 +116,8 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.cursor-po {
+  cursor: pointer;
 }
 </style>
