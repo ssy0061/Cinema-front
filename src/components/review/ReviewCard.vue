@@ -1,12 +1,11 @@
 <template>
   <div class="col-4">
-    <h3>영화리뷰카드</h3>
-    <p>{{ review }}</p>
-
-    
-    <div class="card text-white bg-secondary" style="width: 25rem;">
+        
+    <div class="card text-white mb-4" style="width: 25rem;">
       <div class="card-header">
-        {{ review.user.username }} | 
+        <span @click="goProfile">
+          {{ review.user.username }}
+        </span> | 
         평점(별점???) {{ review.movie.vote_average }} |
         (리뷰 좋아요 수) {{ likes_cnt }} |
         
@@ -19,9 +18,13 @@
           </span>
         </span>
       </div>
-      <img :src="posterUrl" alt="포스터" class="card-img-top">
+      <img :src="posterUrl" alt="포스터" class="card-img-top" @click="goDetail(review.movie.id)">
       <div class="card-body">
-        <h5 class="card-title">{{ review.movie.title }} ( {{ releaseDate }} )</h5>
+        <h5 class="card-title">
+          <span 
+            @click="goDetail(review.movie.id)"
+          >{{ review.movie.title }} ( {{ releaseDate }} )
+          </span></h5>
         <p class="card-text">{{ review.content }}</p>
       </div>
     </div>
@@ -48,8 +51,14 @@ export default {
     }
   },
   methods: {
+    goProfile: function () {
+      this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+    },
+    goDetail: function (id) {
+      this.$router.push({ name: 'Movie', params: { movieId: id }})
+    },
     likesRivew: function () {
-      console.log(getToken())
+      // console.log(getToken())
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/reviews/${this.review.id}/likes/`,
@@ -90,5 +99,7 @@ export default {
 </script>
 
 <style>
-
+.card {
+  background-color: #2f2f2f !important;
+}
 </style>
