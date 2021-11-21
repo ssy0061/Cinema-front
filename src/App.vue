@@ -3,12 +3,12 @@
     <div id="nav">
       <router-link to="/"><img class="logo" src="@/assets/images/logo4.png" alt=""></router-link>
       <div v-if="chk" class="navi">
-        <router-link to="/recommend/">추천</router-link> | 
+        <router-link to="/recommend/">Recommend</router-link> | 
         <router-link 
           :to="{
             name: 'Profile',
             params: { username: loginUser.username }
-          }">내 프로필
+          }">My Profile
         </router-link> 
       </div>
       <div>
@@ -92,6 +92,7 @@ export default {
 <style>
 body {
   background-color: #141414 !important;
+  overflow-y: scroll;
 }
 .app-view {
   width: 1600px;
@@ -111,13 +112,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
 }
 .logo {
   width: 200px;
-  margin: 10px 0 10px 30px;
+  margin: 10px 0 10px 20px;
 }
 .navi {
-  margin-left: -110px;
+  margin-left: -150px;
   font-size: 20px;
 
 }
@@ -126,6 +128,8 @@ body {
   font-weight: bold;
   color: white;
   text-decoration: none;
+  display: inline-block;
+  padding: 0 10px 0 10px;
 }
 
 #nav a.router-link-exact-active {

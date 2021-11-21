@@ -1,6 +1,6 @@
 <template>
   <div class="container-div">
-    <h3 class="movie-list-title">toprated</h3>
+    <h3 class="movie-list-title">TOP RATED</h3>
     <swiper class="swiper" :options="swiperOption" v-if="movies">
       <swiper-slide v-for="movie in movies" :key="movie.id">
         <movie-card :movie="movie"></movie-card>

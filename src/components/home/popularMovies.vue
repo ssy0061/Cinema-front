@@ -4,7 +4,7 @@
       <img :src="`https://image.tmdb.org/t/p/original/${movies[0].backdrop_path}`" alt="배경 사진" class="most-pop-img">
     </div>
     <div class="container-div">
-      <h3 class="movie-list-title">popular</h3>
+      <h3 class="movie-list-title">POPULAR</h3>
       <swiper class="swiper" :options="swiperOption" v-if="movies">
         <swiper-slide v-for="movie in movies" :key="movie.id">
           <movie-card :movie="movie"></movie-card>
@@ -75,8 +75,10 @@ export default {
 }
 .movie-list-title {
   text-align: left;
-  color: gray;
+  color: #e5e5e5;
+  font-weight: 800;
   font-size: 30px;
+  padding-bottom: 10px;
 }
 .most-pop-img {
   -webkit-box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65); 
