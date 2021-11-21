@@ -10,7 +10,14 @@
         평점(별점???) {{ review.movie.vote_average }} |
         (리뷰 좋아요 수) {{ likes_cnt }} |
         
-        <span @click="likesRivew">{{this.chk ? '💖' : '🤍'}}</span>
+        <span @click="likesRivew">
+          <span v-if="chk">
+            <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+          </span>
+          <span v-else>
+            <font-awesome-icon :icon="['far', 'heart']" />
+          </span>
+        </span>
       </div>
       <img :src="posterUrl" alt="포스터" class="card-img-top">
       <ul class="list-group list-group-flush">
@@ -40,7 +47,8 @@ export default {
     return {
       posterUrl: null,
       releaseDate: null,
-      likes_cnt: this.review.like_users.length
+      likes_cnt: this.review.like_users.length,
+      chk: null,
     }
   },
   methods: {
