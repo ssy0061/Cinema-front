@@ -60,6 +60,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          // 이미 작성했으면 alert 알림창 띄우기
         })
         this.inputTxt = null
         this.inputNum = null

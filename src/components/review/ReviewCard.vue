@@ -4,7 +4,7 @@
     <p>{{ review }}</p>
 
     
-    <div class="card" style="width: 25rem;">
+    <div class="card text-white bg-secondary" style="width: 25rem;">
       <div class="card-header">
         {{ review.user.username }} | 
         평점(별점???) {{ review.movie.vote_average }} |
@@ -20,14 +20,10 @@
         </span>
       </div>
       <img :src="posterUrl" alt="포스터" class="card-img-top">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <h5 class="card-title">{{ review.movie.title }} ( {{ releaseDate }} )</h5>
-        </li>
-        <li class="list-group-item">
-          <p class="card-text">리뷰 내용: {{ review.content }}</p>
-        </li>
-      </ul>
+      <div class="card-body">
+        <h5 class="card-title">{{ review.movie.title }} ( {{ releaseDate }} )</h5>
+        <p class="card-text">{{ review.content }}</p>
+      </div>
     </div>
 
   </div>
