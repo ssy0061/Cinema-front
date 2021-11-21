@@ -1,11 +1,7 @@
 <template>
   <div class="my-3">
-    <h2>리뷰 아이템</h2>
     <div>
-      <h4>리뷰</h4>
-      <p>{{ review }}</p>
-
-      <div class="card border-dark mb-3" style="max-width: 18rem;">
+      <div class="card border-dark mb-3 text-white bg-secondary" style="width: 100p;">
         <div class="card-header">
           <div class="row">
             <h5 class="col-4 mb-0" @click="goProfile">{{ review.user.username }}</h5>
@@ -24,7 +20,7 @@
 
           </div>
         </div>
-        <div class="card-body text-dark">
+        <div class="card-body">
           <h5 class="card-title">{{ review.content }}</h5>
           <p class="card-text"></p>
         </div>
