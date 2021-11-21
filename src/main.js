@@ -12,15 +12,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // 사용할 fontawesome 아이콘을 개별 import (library.add도 필수)
 // 사용 예시 : <font-awesome-icon :icon="['fas', 'heart']" />
 // solid
-import { faHeart } from '@fortawesome/free-solid-svg-icons' 
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
+// <font-awesome-icon :icon="['fas', 'heart']" />
+
 // brands
 // import { faFontAwesome as fabFontAwesome } from '@fortawesome/free-brands-svg-icons'
+
 // regular
-// import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+// <font-awesome-icon :icon="['far', 'heart']" />
 
 
-library.add(faHeart)
-// library.add(farHeart)
+library.add(fasHeart, farHeart)
 // library.add(fabFontAwesome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

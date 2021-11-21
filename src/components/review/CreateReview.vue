@@ -1,9 +1,7 @@
 <template>
   <div>
     <h3>리뷰 작성</h3>
-    <i class="fas fa-user"></i>aaaaaa
-    <font-awesome-icon :icon="['fas', 'faHeart']" />
-    <font-awesome-icon :icon="['far', 'farHeart']" />
+    
     <textarea 
       name="" id="" cols="30" rows="10"
       v-model="inputTxt"
