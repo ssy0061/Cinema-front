@@ -1,10 +1,14 @@
 <template>
-  <p class="rink" v-if="movie" @click="goDetail(movie.id)">
-    <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="영화포스트" class="poster">
-  </p>
+  <div>
+    <p class="rink" v-if="movie" @click="goDetail(movie.id)">
+      <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="영화포스트" class="poster">
+    </p>
+  </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'movieCard',
   props: {
@@ -12,9 +16,18 @@ export default {
   },
   methods: {
     goDetail: function (id) {
-      this.$router.push({ name: 'Movie', params: { movieId: id }})
+      if (this.isLogin) {
+        this.$router.push({ name: 'Movie', params: { movieId: id }})
+      } else {
+        this.$router.push({ name: 'Login'})
+      }
     }
   },
+  computed: {
+    ...mapState([
+      'isLogin'
+    ])
+  }
 }
 </script>
 
