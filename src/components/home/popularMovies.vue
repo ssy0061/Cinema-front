@@ -1,11 +1,11 @@
 <template>
   <div v-if="movies">
-    <div @click="goDetail(movies[0].id)" class="pop-movie">
-      <img :src="`https://image.tmdb.org/t/p/original/${movies[0].backdrop_path}`" alt="배경 사진" class="most-pop-img">
+    <div @click="goDetail(popMovie.id)" class="pop-movie">
+      <img :src="`https://image.tmdb.org/t/p/original/${popMovie.backdrop_path}`" alt="배경 사진" class="most-pop-img">
       <div class="pop-movie-desc">
-        <h1>{{movies[0].title}}</h1>
+        <h1>{{popMovie.title}}</h1>
         <p>{{genreStr}}</p>
-        <star-rating :rating="3.8" :read-only="true" :increment="0.01" :star-size="20"></star-rating>
+        <star-rating :rating="popMovie.vote_average/2" :read-only="true" :increment="0.01" :star-size="20"></star-rating>
       </div>
     </div>
     <div class="container-div">
