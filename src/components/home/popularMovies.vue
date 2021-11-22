@@ -24,6 +24,7 @@
 
 <script>
 import movieCard from '@/components/home/movieCard'
+import { mapState } from 'vuex'
 import axios from 'axios'
 
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
@@ -60,10 +61,18 @@ export default {
   },
   methods: {
     goDetail: function (id) {
-      this.$router.push({ name: 'Movie', params: { movieId: id }})
+      console.log(this.isLogin)
+      if (this.isLogin) {
+        this.$router.push({ name: 'Movie', params: { movieId: id }})
+      } else {
+        this.$router.push({ name: 'Login' })
+      }
     }
   },
   computed: {
+    ...mapState([
+      'isLogin'
+    ]),
     genreStr: function () {
       let tmp = ''
       this.popMovie.genres.forEach(e => {

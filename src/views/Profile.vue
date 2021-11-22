@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <div v-if="user">
-      <h3>{{ user.username }}'s 프로필</h3>
+  <div class="my-profile">
+    <div v-if="user" class="my-3">
+      <h1>{{ user.username }}'s 프로필</h1>
       <div>
         <span>점수: {{ user.curr_point }} / {{ user.acc_point }}</span><span>  </span>
         <p>팔로잉: {{ user.followings_cnt }}, 팔로워: {{ user.followers_cnt }}</p>
       </div>
       <div v-if="loginUser.username !== user.username">
         <div v-if="chk">
-          <button class="btn btn-danger" @click="follow">언팔로우</button>
+          <button class="btn-unfollow" @click="follow">언팔로우</button>
         </div>
         <div v-else>
-          <button class="btn btn-primary" @click="follow">팔로우</button>
+          <button class="btn-follow" @click="follow">팔로우</button>
         </div>
       </div>
     </div>
@@ -145,6 +145,44 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.my-profile {
+  color: white;
+}
+.btn-unfollow {
+  background-color: #2f2f2f;
+  border: 2px solid #2f2f2f;
+  color: white;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+.btn-unfollow:hover {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-follow {
+  background-color: #2f2f2f;
+  border: 2px solid #2f2f2f;
+  color: white;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+.btn-follow:hover {
+  background-color: #0b5ed7;
+  color: white;
+}
 </style>
