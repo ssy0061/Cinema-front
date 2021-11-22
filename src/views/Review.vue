@@ -1,13 +1,13 @@
 <template>
   <div v-if="review" class="text-light" style="position: relative">
     <p class="my-5" style="font-size: 3rem">
-      {{ loginUser.username }}'s Review
+      {{ review.user.username }}'s Review
     </p>
     <div class="review-detail">
       <div>
-        <img :src="posterUrl" alt="포스터" width="400px" />
+        <img :src="posterUrl" alt="포스터" width="800px" />
       </div>
-      <div style="width: 350px;">
+      <div style="width: 800px; margin-top:20px;">
         <h3>{{ review.movie.title }}</h3>
         <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
         <hr />
@@ -18,8 +18,8 @@
             @keyup.enter="createReview"
             v-model="editContent"
             placeholder="감상평을 남겨주세요."
-            rows="15"
-            cols="35"
+            rows="7"
+            cols="95"
           ></textarea>
           <br>
           <button class="my-button" @click="reviewEditSubmit">작성</button>
@@ -165,7 +165,7 @@ export default {
     })
       .then((res) => {
         this.review = res.data
-        this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.poster_path}`
+        this.posterUrl = `https://image.tmdb.org/t/p/original/${this.review.movie.backdrop_path}`
         this.comments = res.data.comment_set
         this.editContent = res.data.content
         console.log(this.review)
@@ -190,7 +190,5 @@ export default {
   text-align: left;
   margin: 0 auto;
   width: 800px;
-  display: flex;
-  justify-content: space-between;
 }
 </style>
