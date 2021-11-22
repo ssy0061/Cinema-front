@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // 사용 예시 : <font-awesome-icon :icon="['fas', 'heart']" />
 // solid
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisV as fasEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { faTimes as fasTimes } from '@fortawesome/free-solid-svg-icons'
 // <font-awesome-icon :icon="['fas', 'heart']" />
 
 // brands
@@ -23,7 +25,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 // <font-awesome-icon :icon="['far', 'heart']" />
 
 
-library.add(fasHeart, farHeart)
+library.add(fasHeart, farHeart, fasEllipsisV, fasTimes)
 // library.add(fabFontAwesome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

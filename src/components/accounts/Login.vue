@@ -27,7 +27,7 @@
           <label for="password">비밀번호</label>
         </div>
         <div class='d-flex justify-content-start' style="color: light">
-          <span @click="goSignup" class="mb-1 ms-1 rink">회원가입</span>
+          <span @click="goSignup" class="mb-1 ms-1 link">회원가입</span>
         </div>
       </div>
       <div class="card-body pt-0">

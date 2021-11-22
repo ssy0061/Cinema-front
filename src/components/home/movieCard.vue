@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="rink" v-if="movie" @click="goDetail(movie.id)">
+    <p class="link" v-if="movie" @click="goDetail(movie.id)">
       <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="영화포스트" class="poster">
     </p>
   </div>
