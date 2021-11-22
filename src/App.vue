@@ -72,6 +72,17 @@ export default {
 
 
 <style>
+.user-level {
+  font-weight: bold;
+  border: 1px solid #cfcfcf;
+  font-size: 1.3rem;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 4px;
+  border-radius: 5px;
+  color: #999;
+  background: rgba(255, 255, 255, 0);
+}
 body {
   background-color: #141414 !important;
   overflow-y: scroll;

@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style>
-  .rink {
+  .link {
     cursor: pointer;
   }
 </style>

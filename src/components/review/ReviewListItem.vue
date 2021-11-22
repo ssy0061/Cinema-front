@@ -5,10 +5,16 @@
         <div class="card-header border-secondary border-1">
           <div class="container row" style="font-size: 1.5rem;">
             <div class="col-9">
-              <p class="rink mb-0" @click="goProfile">{{ review.user.username }}</p>
+              <p class="link mb-0" @click="goProfile">
+                <span class="user-level me-3">
+                {{ level }}
+                </span>
+                {{ review.user.username }}
+              </p>
+              
               <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
             </div>
-            <div class="rink col-3 px-0 heart-size d-flex justify-content-center align-items-center" @click="likesRivew" >
+            <div class="link col-3 px-0 heart-size d-flex justify-content-center align-items-center" @click="likesRivew" >
               <span v-if="liked">
                 <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
               </span>
@@ -23,7 +29,7 @@
           </div>
         </div>
         <div class="card-body cursor-po" style="font-size: 1.4rem;" @click="goReview">
-          <p class="card-title mb-0">{{ review.content }}</p>
+          <p class="card-title mb-0">{{ review.title }}</p>
           <p class="card-text mb-0"></p>
         </div>
       </div>
@@ -49,6 +55,7 @@ export default {
     return {
       liked: null,
       likedNum: null,
+      level: Math.floor(this.review.user.acc_point/100),
     }
   },
   computed: {

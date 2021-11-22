@@ -10,7 +10,8 @@
         <p class="card-text text-light">별점을 선택해 주세요</p>
       </div>
       <div class="card-body">
-        <textarea @keyup.enter="createReview" v-model="inputTxt" cols="50" rows="5" placeholder="감상평을 남겨주세요."></textarea>
+        <input class="mb-3 ps-1" type="text" v-model="inputTitle" placeholder="제목을 입력해주세요." size="57">
+        <textarea @keyup.enter="createReview" v-model="inputContent" cols="60" rows="5" placeholder="감상평을 남겨주세요."></textarea>
       </div>
       <div class="card-body pt-0">
         <button class="my-button" @click="createReview">작성</button>
@@ -32,7 +33,8 @@ export default {
   },
   data: function () {
     return {
-      inputTxt: null,
+      inputTitle: null,
+      inputContent: null,
       inputRating: null,
       ...mapState([
       'tmpReview',
@@ -55,13 +57,14 @@ export default {
     },
     createReview: function () {
       const reviewItem = {
-        content: this.inputTxt,
+        title: this.inputTitle,
+        content: this.inputContent,
         rated: this.inputRating * 2,
       }
-      if (!reviewItem.content) {
-        alert('감상평을 남겨주세요.')
+      if (!reviewItem.title) {
+        alert('한줄평을 남겨주세요.')
       }
-      if (reviewItem.content) {
+      if (reviewItem.title) {
         axios({
           method: 'post',
           url: `http://127.0.0.1:8000/reviews/movie/${this.movieId}/`,
@@ -78,7 +81,8 @@ export default {
           // (이미 작성한 경우인지 확인 필요)
           alert(err.response.data.detail)
         })
-        this.inputTxt = null
+        this.inputTitle = null
+        this.inputContent = null
         this.inputRating = null
       }
     }
