@@ -76,7 +76,7 @@ export default {
           console.log(err)
           // 이미 작성했으면 alert 알림창 띄우기
           // (이미 작성한 경우인지 확인 필요)
-          alert('이미 리뷰를 작성한 영화입니다.')
+          alert(err.response.data.detail)
         })
         this.inputTxt = null
         this.inputRating = null
