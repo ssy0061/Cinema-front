@@ -4,18 +4,20 @@
       <div class="card border-secondary border-2 mb-3 text-white">
         <div class="card-header border-secondary border-1">
           <div class="container row" style="font-size: 1.5rem;">
-            <p class="rink col-2 mb-0" @click="goProfile">{{ review.user.username }}</p>
-            <star-rating class="col-8 mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
-            <div class="rink col-1 pe-0" @click="likesRivew">
+            <div class="col-9">
+              <p class="rink mb-0" @click="goProfile">{{ review.user.username }}</p>
+              <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
+            </div>
+            <div class="rink col-3 px-0 heart-size d-flex justify-content-center align-items-center" @click="likesRivew" >
               <span v-if="liked">
-                <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
               </span>
               <span v-else>
-                <font-awesome-icon :icon="['far', 'heart']" size="lg" />
+                <font-awesome-icon :icon="['far', 'heart']"/>
               </span>
-            </div>
-            <div class="col-1 ps-0">
-              {{ likedNum }}
+              <span class="ms-3" style="font-size: 1.5rem">
+                {{ likedNum }}
+              </span>
             </div>
 
           </div>
@@ -94,8 +96,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .card {
   background-color: #2f2f2f !important;
+}
+.heart-size {
+  font-size: 2rem;
+}
+.vue-star-rating-star {
+  padding-bottom: 3.5px;
 }
 </style>

@@ -5,15 +5,18 @@
 
     </div>
     <hr class="mt-0" style="height: 2px;">
+    <div v-if="videoUrl" class="mb-5">
+      <iframe 
+        width="1350" height="720"
+        :src="videoUrl">
+      </iframe>
+    </div>
     <div class="d-flex justify-content-around mx-5 px-5">
       <div class="mx-3">
         <img :src="posterUrl" alt="포스터" width="400px">
 
       </div>
       <div class="px-5">
-        <div v-if="videoUrl">
-          <div>예고편 영상</div>
-        </div>
 
         <div class="text-start" style="font-size: 1.4rem;">
           <p>{{ releaseDate }}</p>
@@ -25,7 +28,7 @@
             >
             {{ genre.name }}</span>
           </div>
-          <star-rating :rating="movie.vote_average/2" :read-only="true" :increment="0.01" :star-size="20"></star-rating>
+          <star-rating :rating="movie.vote_average/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
           <p class="mt-5">{{ movie.overview }}</p>
 
         </div>
@@ -55,22 +58,49 @@ export default {
     movieId: [Number, String],
   },
   methods: {
+    getMovie: function () {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/movies/${this.movieId}/`
+      })
+      .then(res => {
+        // console.log(res.data)
+        this.movie = res.data
+        this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
+        const data = this.movie.release_date.split('-')
+        this.releaseDate = `${data[0]}. ${data[1]}`
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    getMovieVideo: function () {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos`,
+        params: {
+          api_key: '01558afb166c2eadee2e5d5648921e61',
+          language: 'ko-KR'
+        }
+      })
+      .then(res => {
+        const getVideoKey = function () {
+          for (let video of res.data.results) {
+            if (video.type === "Trailer") {
+              return `https://www.youtube.com/embed/${video.key}`
+            }
+          }
+        }
+        this.videoUrl = getVideoKey()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   },
   created: function () {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/movies/${this.movieId}/`
-    })
-    .then(res => {
-      // console.log(res.data)
-      this.movie = res.data
-      this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
-      const data = this.movie.release_date.split('-')
-      this.releaseDate = `${data[0]}. ${data[1]}`
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    this.getMovie()
+    this.getMovieVideo()
   }
 }
 </script>

@@ -3,13 +3,13 @@
     <div class="card text-white mb-4" style="width: 25rem;">
       <div class="card-header">
         <span @click="goProfile">
-          <div class="cursor-po">
+          <div class="cursor-po" style="font-size: 1.5rem">
             {{ review.user.username }}
           </div>
-          <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="12" :show-rating="false"></star-rating>
+          <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25" :show-rating="false"></star-rating>
         </span>
-        <span>
-          <span @click="likesRivew" class="cursor-po" style="font-size: 2rem">
+        <span class="d-flex align-items-center">
+          <span @click="likesRivew" class="cursor-po pe-2" style="font-size: 2rem">
             <span v-if="chk">
               <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
             </span>
