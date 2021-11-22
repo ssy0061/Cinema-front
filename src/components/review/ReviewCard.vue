@@ -30,7 +30,7 @@
             class="cursor-po"
           >{{ review.movie.title }}
           </span></h5>
-        <p class="card-text">{{ review.content }}</p>
+        <p class="card-text cursor-po" @click="goReview">{{ review.content }}</p>
       </div>
     </div>
   </div>
@@ -70,6 +70,9 @@ export default {
     },
     goDetail: function (id) {
       this.$router.push({ name: 'Movie', params: { movieId: id }})
+    },
+    goReview: function () {
+      this.$router.push({ name: 'Review', params: { reviewId: `${this.review.id}`}})
     },
     likesRivew: function () {
       // console.log(getToken())

@@ -22,7 +22,7 @@
 
           </div>
         </div>
-        <div class="card-body" style="font-size: 1.4rem;">
+        <div class="card-body cursor-po" style="font-size: 1.4rem;" @click="goReview">
           <p class="card-title mb-0">{{ review.content }}</p>
           <p class="card-text mb-0"></p>
         </div>
@@ -62,6 +62,9 @@ export default {
   methods: {
     goProfile: function () {
       this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+    },
+    goReview: function () {
+      this.$router.push({ name: 'Review', params: { reviewId: `${this.review.id}`}})
     },
     getLiked: function () {
       if (this.review.like_users.find(id => this.loginUser.id === id)) {
