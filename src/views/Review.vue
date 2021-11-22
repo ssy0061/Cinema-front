@@ -24,7 +24,7 @@
           <br>
           <button class="my-button" @click="reviewEditSubmit">작성</button>
         </div>
-        <h4 v-else>{{ review.content }}</h4>
+        <h4 style="word-wrap:break-word;" v-else>{{ review.content }}</h4>
       </div>
     </div>
     <div class="card border-secondary" style="width: 800px; margin: 30px auto">
