@@ -75,14 +75,12 @@ export default {
       this.$router.push({ name: 'Review', params: { reviewId: `${this.review.id}`}})
     },
     likesRivew: function () {
-      // console.log(getToken())
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/reviews/${this.review.id}/likes/`,
         headers: getToken()
       })
       .then(res => {
-        console.log(res.data)
         if (res.data.liked) {
           this.likes_cnt++
           this.chk = true
@@ -102,7 +100,6 @@ export default {
     ])
   },
   created: function () {
-    console.log(this.review)
     if(this.review.like_users.find(id => this.loginUser.id === id)) {
           this.chk = true
         } else {

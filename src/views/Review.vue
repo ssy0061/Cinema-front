@@ -5,7 +5,7 @@
     </p>
     <div class="review-warp mb-5">
       <div class="link" @click="goDetail(review.movie.id)">
-        <img :src="posterUrl" alt="포스터" width="800px" />
+        <img :src="posterUrl" alt="포스터" width="800px" class="review-img" />
       </div>
       <div style="margin-top:20px;">
         <h3 class="review-detail link" @click="goDetail(review.movie.id)">{{ review.movie.title }}</h3>
@@ -247,6 +247,10 @@ export default {
 </script>
 
 <style>
+.review-img {
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65); 
+box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65);
+}
 .wrap-dropdown {
   width: 100%;
   min-width: 0;
