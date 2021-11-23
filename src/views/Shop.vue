@@ -2,8 +2,8 @@
   <div>
     <h1 style="margin: 40px 0; color: white">Shop</h1>
     <hr style="color: white" />
-    <div class="row">
-      <div class="col" v-for="item in items" :key="item.id">
+    <div class="shop-con">
+      <div class="shop-item" v-for="item in items" :key="item.id">
         <div class="card" style="width: 18rem">
           <img :src="item.img" class="card-img-top" alt="" />
           <div class="card-body">
@@ -105,4 +105,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.shop-con {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>

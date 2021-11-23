@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Movie from '../views/Movie.vue'
 import Recommend from '../views/Recommend.vue'
+import Recommend2 from '../views/Recommend2.vue'
 import Profile from '../views/Profile.vue'
 import Review from '../views/Review.vue'
 import Shop from '../views/Shop.vue'
@@ -37,6 +38,11 @@ const routes = [
     path: '/recommend/',
     name: 'Recommend',
     component: Recommend
+  },
+  {
+    path: '/recommend2/',
+    name: 'Recommend2',
+    component: Recommend2
   },
   {
     path: '/profile/:username/',
