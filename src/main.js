@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisV as fasEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import { faTimes as fasTimes } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight as fasChevronRight } from '@fortawesome/free-solid-svg-icons'
 // <font-awesome-icon :icon="['fas', 'heart']" />
 
 // brands
@@ -23,10 +24,10 @@ import { faTimes as fasTimes } from '@fortawesome/free-solid-svg-icons'
 // regular
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
-// <font-awesome-icon :icon="['far', 'heart']" />
+// <font-awesome-icon :icon="['far', 'heart']" :style="{ color: 'white' }" />
 
+library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare, fasChevronRight)
 
-library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare)
 // library.add(fabFontAwesome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

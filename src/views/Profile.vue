@@ -2,10 +2,22 @@
   <div class="my-profile">
     <div v-if="user" class="my-3">
       <h1>{{ user.username }}'s 프로필</h1>
-      <div>
-        <span>점수: {{ user.curr_point }} / {{ user.acc_point }}</span><span>  </span>
-        <p>팔로잉: {{ user.followings_cnt }}, 팔로워: {{ user.followers_cnt }}</p>
+
+      <div class="d-flex justify-content-center mt-3">
+        <div style="text-align: left;">
+          <p>레벨: 
+            <!-- user level -->
+            <span 
+              :class="[levelClass(user.acc_point)]"
+              class="user-level"
+            >{{ level(user.acc_point) }}</span>
+          </p>
+          <p>점수: {{ user.curr_point }} / {{ user.acc_point }}</p>
+          <p>팔로잉: {{ user.followings_cnt }}, 팔로워: {{ user.followers_cnt }}</p>
+        </div>
       </div>
+
+      <!-- 버튼 -->
       <div v-if="loginUser.username !== user.username">
         <div v-if="chk">
           <button class="btn-unfollow" @click="follow">언팔로우</button>
@@ -14,12 +26,13 @@
           <button class="btn-follow" @click="follow">팔로우</button>
         </div>
       </div>
+
     </div>
 
     <hr>
 
-    <div v-if="reviews" class="row justify-content-around">
-      <h4>작성한 리뷰(영화)</h4>
+    <h4>작성한 리뷰(영화)</h4>
+    <div v-if="reviews" class="row justify-content-around m-5">
       <!-- <img :src="posterUrl" alt="포스터" width="300px"> -->
       <review-card
         v-for="review in reviews" 
@@ -62,6 +75,12 @@ export default {
     ])
   },
   methods: {
+    level: function (point) {
+      return Math.floor(point/100)
+    },
+    levelClass: function (point) {
+      return `level-${Math.floor(point/100)}`
+    },
     follow: function () {
       const token = localStorage.getItem('JWT')
       const config = {

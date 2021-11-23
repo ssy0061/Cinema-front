@@ -1,17 +1,23 @@
 <template>
   <div v-if="review" class="text-light d-flext justify-content-center" style="position: relative">
-    <p class="mt-5 mb-2" style="font-size: 3rem">
-      <span class="link" @click="goProfile">{{ review.user.username }}</span>'s Review
-    </p>
+    
+
     <div class="review-warp mb-5">
-      <div class="link" @click="goDetail(review.movie.id)">
-        <img :src="posterUrl" alt="포스터" width="800px" class="review-img" />
+      <!-- 영화 포스터 & 제목 -->
+      <div>
+        <img @click="goDetail(review.movie.id)" :src="posterUrl" alt="포스터" width="800px" class="review-img link" />
+        <h3 class="review-detail mt-3">
+          <span class="link" @click="goDetail(review.movie.id)">
+            {{ review.movie.title }}
+          </span>
+        </h3>
       </div>
-      <div style="margin-top:20px;">
-        <h3 class="review-detail link" @click="goDetail(review.movie.id)">{{ review.movie.title }}</h3>
-        
+
+      <!-- 리뷰 & 댓글-->
+      <div class="mt-4">
+
+        <!-- 리뷰 수정 폼 -->
         <div v-if="isEdit" class="mt-3">
-          <!-- 리뷰 수정 -->
           <div class="card border-secondary" style="width: 800px;">
             <div class="card-header border-secondary border-1">
               <h3 class="mb-0">리뷰 수정</h3>
@@ -21,23 +27,54 @@
               <p class="card-text text-light">별점을 선택해 주세요</p>
             </div>
             <div class="card-body">
-              <input class="mb-3 ps-1" type="text" v-model="editTitle" placeholder="제목을 입력해주세요." size="88">
-              <textarea @keyup.enter="reviewEditSubmit" v-model="editContent" cols="90" rows="5" placeholder="감상평을 남겨주세요."></textarea>
+              <input class="mb-3 ps-1 input-text" type="text" v-model="editTitle" placeholder="제목을 입력해주세요." size="87">
+              <textarea class="textarea" v-model="editContent" cols="90" rows="5" placeholder="감상평을 남겨주세요."></textarea>
             </div>
             <div class="card-body pt-0 text-center">
               <button class="my-button-update" @click="reviewEditSubmit">수정</button>
               <button class="my-button-cancel" @click="reviewEdit">취소</button>
             </div>
           </div>
-
-
         </div>
+
+        <!-- 리뷰 조회 -->
         <div v-else class="review-detail">
-          <!-- 리뷰 조회 -->
+
+          <!-- 리뷰 header -->
           <div class="d-flex justify-content-between">
-            <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
-            <span v-if="loginUser.id === review.user.id">
-              <!-- 드랍다운 설정메뉴 -->
+
+            <!-- 리뷰 유저 & 별점 & 좋아요 -->
+            <div class="container row ps-2" style="font-size: 1.5rem;">
+              <div class="col-9">
+                <div class="mb-0 d-flex">
+                  <!-- user level -->
+                  <div class="d-flex align-items-center" >
+                    <span 
+                      :class="[levelClass(review.user.acc_point)]"
+                      class="link user-level"
+                      @click="goProfile(review.user.username)"
+                    >{{ level(review.user.acc_point) }}</span>
+                  </div>
+                  <span class="link" @click="goProfile(review.user.username)">{{ review.user.username }}</span>
+                </div>
+                
+                <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
+              </div>
+              <div class="col-3 px-0 heart-size d-flex justify-content-center align-items-center">
+                <span v-if="liked" class="link"  @click="likesRivew">
+                  <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+                </span>
+                <span v-else class="link"  @click="likesRivew">
+                  <font-awesome-icon :icon="['far', 'heart']"/>
+                </span>
+                <span class="ms-3" style="font-size: 1.5rem">
+                  {{ likedNum }}
+                </span>
+              </div>
+            </div>
+
+            <!-- 드랍다운 설정메뉴 -->
+            <span v-if="loginUser.id === review.user.id" class="d-flex align-items-center">
               <b-dropdown menu-class="py-1 wrap-dropdown" size="lg" right variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
                   <font-awesome-icon :icon="['fas', 'ellipsis-v']" :style="{ color: 'white' }" />
@@ -47,9 +84,14 @@
               </b-dropdown>
             </span>
           </div>
+
+          <!-- 리뷰 body -->
           <hr class="mt-0">
-          <h3 style="word-wrap:break-word;">{{ review.title }}</h3>
-          <h4 style="word-wrap:break-word;">{{ review.content }}</h4>
+          <div class="ps-2">
+            <h3 style="word-wrap:break-word;">{{ review.title }}</h3>
+            <h4 style="word-wrap:break-word;">{{ review.content }}</h4>
+          </div>
+
 
           <!-- 댓글 조회 & 작성 & 삭제 -->
           <div class="card border-secondary" style="width: 800px; margin: 30px auto">
@@ -63,13 +105,27 @@
                 style="text-align: left"
                 class="d-flex justify-content-between"
               >
-                <p class="mb-2" style="padding-left: 10px">
-                  <span class="author">{{ comment.author.username }} : 
+                <div class="mb-3" style="padding-left: 10px">
+                  <!-- user level -->
+                  <span class="mb-0 d-flex align-items-center">
+                    <span class="d-flex align-items-center">
+                      <span 
+                        @click="goProfile(comment.author.username)"
+                        :class="levelClass(comment.author.acc_point)"
+                        class="link user-level comment-user-level"
+                      >
+                      {{ level(comment.author.acc_point) }}</span>
+                    </span>
+                    <span 
+                      @click="goProfile(comment.author.username)" 
+                      class="link me-2"
+                    >
+                    {{ comment.author.username }}</span> 
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="sm" :style="{ color: 'gray' }" />
+                    <span class="ms-3">{{ comment.content }}</span>
                   </span>
-                  <span>
-                    {{ comment.content }}
-                  </span>
-                </p>
+                </div>
+
                 <button
                   v-if="loginUser.username === comment.author.username"
                   class="my-comment-button-delete"
@@ -78,9 +134,11 @@
                   <font-awesome-icon :icon="['fas', 'times']" />
                 </button>
               </div>
+
               <!-- 댓글 작성 -->
               <div class="d-flex justify-content-around mt-3">
                 <input
+                  class="input-text"
                   style="width: 600px"
                   type="text"
                   @keyup.enter="createComments"
@@ -128,6 +186,9 @@ export default {
       editContent: null,
       inputRating: null,
       reviewRating: null,
+
+      liked: null,
+      likedNum: null,
     }
   },
   components: {
@@ -135,14 +196,50 @@ export default {
   },
   computed: {
     ...mapState(["loginUser"]),
+    point: function () {
+      return this.review.user.acc_point
+    },
   },
   methods: {
-    goProfile: function () {
-      this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+    level: function (point) {
+      return Math.floor(point/100)
+    },
+    levelClass: function (point) {
+      return `level-${Math.floor(point/100)}`
+    },
+    goProfile: function (user) {
+      this.$router.push({ name: 'Profile', params: { username: user}})
     },
     goDetail: function (id) {
       this.$router.push({ name: 'Movie', params: { movieId: id }})
     },
+
+    getLiked: function () {
+      if (this.review.like_users.find(id => this.loginUser.id === id)) {
+        this.liked = true
+      } else {
+        this.liked = false
+      }
+    },
+    likesRivew: function () {
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/reviews/${this.review.id}/likes/`,
+        headers: getToken()
+      })
+      .then(res => {
+        this.liked = res.data.liked
+        if (this.liked) {
+          this.likedNum += 1
+        } else {
+          this.likedNum -= 1
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
     createComments: function () {
       axios({
         method: "POST",
@@ -234,6 +331,9 @@ export default {
           this.editContent = res.data.content
           this.inputRating = res.data.rated/2
           console.log(this.review)
+
+          this.getLiked()
+          this.likedNum = this.review.like_users.length
         })
         .catch((err) => {
           console.log(err)
@@ -247,6 +347,23 @@ export default {
 </script>
 
 <style>
+.textarea {
+  border: 2px solid #6c757d;
+  border-radius: 4px;
+  height: 150px;
+  resize: none;
+}
+.input-text {
+  border: 2px solid #6c757d;
+  border-radius: 4px;
+}
+.comment-user-level {
+  font-size: 0.8rem;
+  height: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 4px;
+}
 .review-img {
   -webkit-box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65); 
 box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65);
