@@ -1,9 +1,10 @@
 <template>
   <div>
     <review-list-item 
-      v-for="(review, index) in reviews" 
-      :key="index"
+      v-for="review in reviews" 
+      :key="review.id"
       :review="review"
+      :id="review.id"
     >
     </review-list-item>
   </div>
@@ -57,7 +58,8 @@ export default {
   },
   watch: {
     newReviewItem: function () {
-      this.reviews.push(this.newReviewItem)
+      // this.reviews.push(this.newReviewItem)
+      this.getReviews()
     }
   }
 }

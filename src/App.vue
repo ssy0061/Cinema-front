@@ -76,13 +76,31 @@ export default {
 .user-level {
   font-weight: bold;
   border: 1px solid #cfcfcf;
-  font-size: 1.3rem;
-  text-align: center;
-  padding-left: 10px;
-  padding-right: 4px;
+  font-size: 1rem;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-right: 6px;
   border-radius: 5px;
-  color: #999;
+  height: 25px;
+  color: white;
   background: rgba(255, 255, 255, 0);
+}
+.level-1 {
+  background: yellow;
+  color: #2f2f2f;
+}
+.level-2 {
+  background: green;
+}
+.level-3 {
+  background: rgb(25, 25, 255);
+}
+.level-4 {
+  background: rgb(255, 60, 0);
+}
+.level-5 {
+  background: #141414;
+  border: 1px solid red;
 }
 body {
   background-color: #141414 !important;
