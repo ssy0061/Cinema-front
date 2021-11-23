@@ -8,8 +8,9 @@
           :to="{
             name: 'Profile',
             params: { username: loginUser.username }
-          }">My Profile
+          }">My Profile | 
         </router-link> 
+        <router-link to="/shop/">Shop</router-link>
       </div>
       <div>
         <span v-if="chk">
