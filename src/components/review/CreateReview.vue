@@ -61,9 +61,6 @@ export default {
         content: this.inputContent,
         rated: this.inputRating * 2,
       }
-      if (!reviewItem.title) {
-        alert('한줄평을 남겨주세요.')
-      }
       if (reviewItem.title) {
         axios({
           method: 'post',
@@ -79,7 +76,9 @@ export default {
           console.log(err)
           // 이미 작성했으면 alert 알림창 띄우기
           // (이미 작성한 경우인지 확인 필요)
-          alert(err.response.data.detail)
+          if (err.response.data.detail) {
+            alert(err.response.data.detail)
+          }
         })
         this.inputTitle = null
         this.inputContent = null

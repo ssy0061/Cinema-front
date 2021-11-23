@@ -22,10 +22,11 @@ import { faTimes as fasTimes } from '@fortawesome/free-solid-svg-icons'
 
 // regular
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
 // <font-awesome-icon :icon="['far', 'heart']" />
 
 
-library.add(fasHeart, farHeart, fasEllipsisV, fasTimes)
+library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare)
 // library.add(fabFontAwesome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
