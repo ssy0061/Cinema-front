@@ -27,6 +27,7 @@ import { faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
 // <font-awesome-icon :icon="['far', 'heart']" :style="{ color: 'white' }" />
 
 library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare, fasChevronRight)
+
 // library.add(fabFontAwesome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
