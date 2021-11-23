@@ -5,6 +5,7 @@ import Movie from '../views/Movie.vue'
 import Recommend from '../views/Recommend.vue'
 import Profile from '../views/Profile.vue'
 import Review from '../views/Review.vue'
+import Shop from '../views/Shop.vue'
 
 import Signup from '../components/accounts/Signup.vue'
 import Login from '../components/accounts/Login.vue'
@@ -46,6 +47,11 @@ const routes = [
     path: '/review/:reviewId/',
     name: 'Review',
     component: Review
+  },
+  {
+    path: '/shop/',
+    name: 'Shop',
+    component: Shop
   }
 ]
 
