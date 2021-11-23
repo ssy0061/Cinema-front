@@ -1,36 +1,54 @@
 <template>
-  <div class="col-4 d-flex justify-content-center">
-    <div class="card text-white mb-4" style="width: 25rem;">
-      <div class="card-header">
-        <span @click="goProfile">
-          <div class="cursor-po" style="font-size: 1.5rem">
-            {{ review.user.username }}
-          </div>
-          <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25" :show-rating="false"></star-rating>
-        </span>
-        <span class="d-flex align-items-center">
-          <span @click="likesRivew" class="cursor-po pe-2" style="font-size: 2rem">
-            <span v-if="chk">
-              <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+  <div class="d-flex justify-content-center align-self-start" :class="{'col-4': !isRecommend}">
+    <!-- 영화카드 + 추천(recommend) -->
+    <div class="row container justify-content-center">
+      <!-- 영화카드 -->
+      <div class="col-4 card text-white mb-4" style="width: 25rem;">
+        <div class="card-header">
+          <span :class="[{'align-items-center': !isRecommend}, {'d-flex': !isRecommend}]">
+
+            <span v-if="isRecommend" class="mb-0 d-flex" style="font-size: 1.5rem">
+              <!-- user level -->
+              <span class="link d-flex align-items-center" @click="goProfile(review.user.username)">
+                <span 
+                  :class="[levelClass(review.user.acc_point)]"
+                  class="user-level"
+                >{{ level(review.user.acc_point) }}</span>
+              </span>
+              <span class="link" @click="goProfile(review.user.username)">{{ review.user.username }}</span>
             </span>
-            <span v-else>
-              <font-awesome-icon :icon="['far', 'heart']"/>
+
+            <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25" :show-rating="false"></star-rating>
+          </span>
+          <span class="d-flex align-items-center">
+            <span @click="likesRivew" class="cursor-po pe-2" style="font-size: 2rem">
+              <span v-if="chk">
+                <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+              </span>
+              <span v-else>
+                <font-awesome-icon :icon="['far', 'heart']"/>
+              </span>
+            </span>
+            <span style="font-size: 1.5rem">
+              {{likes_cnt}}
             </span>
           </span>
-          <span style="font-size: 1.5rem">
-            {{likes_cnt}}
-          </span>
-        </span>
+        </div>
+        <img :src="posterUrl" alt="포스터" class="card-img-top cursor-po" @click="goDetail(review.movie.id)">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span 
+              @click="goDetail(review.movie.id)"
+              class="cursor-po"
+            >{{ review.movie.title }}
+            </span></h5>
+          <p class="card-text cursor-po" @click="goReview">{{ review.content }}</p>
+        </div>
       </div>
-      <img :src="posterUrl" alt="포스터" class="card-img-top cursor-po" @click="goDetail(review.movie.id)">
-      <div class="card-body">
-        <h5 class="card-title">
-          <span 
-            @click="goDetail(review.movie.id)"
-            class="cursor-po"
-          >{{ review.movie.title }}
-          </span></h5>
-        <p class="card-text cursor-po" @click="goReview">{{ review.content }}</p>
+
+      <!-- 추천 -->
+      <div v-if="isRecommend" class="col-8">
+        api로 영화 불러오기
       </div>
     </div>
   </div>
@@ -54,18 +72,25 @@ export default {
       releaseDate: null,
       likes_cnt: this.review.like_users.length,
       chk: null,
+      isRecommend: null,
     }
   },
   components: {
     StarRating,
   },
   methods: {
-    goProfile: function () {
+    level: function (point) {
+      return Math.floor(point/100)
+    },
+    levelClass: function (point) {
+      return `level-${Math.floor(point/100)}`
+    },
+    goProfile: function (user) {
       // 리뷰 작성자가 프로필페이지 유저가 아닌 경우 이동
-      if (this.review.user.username !== this.$route.params.username ) {
-        this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
+      if (user !== this.$route.params.username ) {
+        this.$router.push({ name: 'Profile', params: { username: user}})
       } else {
-        console.log(`${this.review.user.username}의 프로필 페이지 입니다.`)
+        console.log(`${user}의 프로필 페이지 입니다.`)
       }
     },
     goDetail: function (id) {
@@ -100,6 +125,15 @@ export default {
     ])
   },
   created: function () {
+    // recommend.vue OR profile.vue 확인
+    if (this.$route.name === 'Recommend') {
+      this.isRecommend = true
+    } else {
+      this.isRecommend = false
+    }
+
+
+    // 좋아요 확인
     if(this.review.like_users.find(id => this.loginUser.id === id)) {
           this.chk = true
         } else {

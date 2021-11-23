@@ -86,21 +86,21 @@ export default {
   background: rgba(255, 255, 255, 0);
 }
 .level-1 {
-  background: yellow;
+  background: rgb(255, 255, 70);
   color: #2f2f2f;
 }
 .level-2 {
   background: green;
 }
 .level-3 {
-  background: rgb(25, 25, 255);
+  background: rgb(48, 48, 224);
 }
 .level-4 {
   background: rgb(255, 60, 0);
 }
 .level-5 {
-  background: #141414;
-  border: 1px solid red;
+  background: #242424;
+  border: 1px solid rgb(255, 60, 60);
 }
 body {
   background-color: #141414 !important;

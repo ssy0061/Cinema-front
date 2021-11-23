@@ -10,8 +10,8 @@
         <p class="card-text text-light">별점을 선택해 주세요</p>
       </div>
       <div class="card-body">
-        <input class="mb-3 ps-1" type="text" v-model="inputTitle" placeholder="제목을 입력해주세요." size="57">
-        <textarea @keyup.enter="createReview" v-model="inputContent" cols="60" rows="5" placeholder="감상평을 남겨주세요."></textarea>
+        <input class="mb-3 ps-1 input-text" type="text" v-model="inputTitle" placeholder="제목을 입력해주세요." size="57">
+        <textarea class="textarea" v-model="inputContent" cols="60" rows="5" placeholder="감상평을 남겨주세요."></textarea>
       </div>
       <div class="card-body pt-0">
         <button class="my-button" @click="createReview">작성</button>
@@ -90,6 +90,16 @@ export default {
 </script>
 
 <style scoped>
+.textarea {
+  border: 2px solid #6c757d;
+  border-radius: 4px;
+  height: 150px;
+  resize: none;
+}
+.input-text {
+  border: 2px solid #6c757d;
+  border-radius: 4px;
+}
 .card-header {
   background-color: #2f2f2f !important;
   color: light;

@@ -26,9 +26,9 @@
                 {{ likedNum }}
               </span>
             </div>
-
           </div>
         </div>
+        
         <div class="card-body cursor-po" style="font-size: 1.4rem;" @click="goReview">
           <p class="card-title mb-0">{{ review.title }}</p>
           <p class="card-text mb-0"></p>
