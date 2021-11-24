@@ -79,7 +79,7 @@ export default {
         method: 'get',
         url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos`,
         params: {
-          api_key: '01558afb166c2eadee2e5d5648921e61',
+          api_key: process.env.VUE_APP_TMDB_API_KEY,
           language: 'ko-KR'
         }
       })
