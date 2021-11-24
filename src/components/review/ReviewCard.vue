@@ -1,13 +1,13 @@
 <template>
-  <div class="d-flex justify-content-center align-self-start" :class="{'col-4': !isRecommend}">
+  <div class="d-flex justify-content-center align-self-start" :class="{'col-4': isProfile}">
     <!-- 영화카드 + 추천(recommend) -->
     <div class="row container justify-content-center">
       <!-- 영화카드 -->
       <div class="col-4 card text-white mb-4" style="width: 25rem;">
         <div class="card-header">
-          <span :class="[{'align-items-center': !isRecommend}, {'d-flex': !isRecommend}]">
+          <span :class="[{'align-items-center': isProfile}, {'d-flex': isProfile}]">
 
-            <span v-if="isRecommend" class="mb-0 d-flex" style="font-size: 1.5rem">
+            <span v-if="!isProfile" class="mb-0 d-flex" style="font-size: 1.5rem">
               <!-- user level -->
               <span class="link d-flex align-items-center" @click="goProfile(review.user.username)">
                 <span 
@@ -36,18 +36,21 @@
         </div>
         <img :src="posterUrl" alt="포스터" class="card-img-top cursor-po" @click="goDetail(review.movie.id)">
         <div class="card-body">
-          <h5 class="card-title">
+          <h4 class="card-title">
             <span 
               @click="goDetail(review.movie.id)"
               class="cursor-po"
             >{{ review.movie.title }}
-            </span></h5>
-          <p class="card-text cursor-po" @click="goReview">{{ review.content }}</p>
+            </span></h4>
+        </div>
+        <div class="card-body mb-3 review-card cursor-po" @click="goReview">
+          <strong style="font-size: 1.3rem">{{ review.title }}</strong>
+          <p class="mb-0">{{ review.content }}</p>
         </div>
       </div>
 
       <!-- 추천 -->
-      <div v-if="isRecommend" class="col-8">
+      <div v-if="isCommunity" class="col-7">
         api로 영화 불러오기
       </div>
     </div>
@@ -72,6 +75,8 @@ export default {
       releaseDate: null,
       likes_cnt: this.review.like_users.length,
       chk: null,
+      isCommunity: null,
+      isProfile: null,
       isRecommend: null,
     }
   },
@@ -126,10 +131,18 @@ export default {
   },
   created: function () {
     // recommend.vue OR profile.vue 확인
-    if (this.$route.name === 'Recommend') {
-      this.isRecommend = true
-    } else {
+    if (this.$route.name === 'Community') {
+      this.isCommunity = true
       this.isRecommend = false
+      this.isProfile = false
+    } else if (this.$route.name === 'Profile') {
+      this.isCommunity = false
+      this.isRecommend = false
+      this.isProfile = true
+    } else if (this.$route.name === 'Recommend') {
+      this.isCommunity = false
+      this.isRecommend = true
+      this.isProfile = false
     }
 
 
@@ -160,5 +173,12 @@ export default {
   }
 .card-body {
   color: #e5e5e5;
+  padding: 10px !important;
+}
+.review-card {
+  text-align: left; 
+  border: 1px solid #6c757d; 
+  padding: 6px;
+  border-radius: 5px;
 }
 </style>

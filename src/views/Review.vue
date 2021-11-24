@@ -43,9 +43,9 @@
           <!-- 리뷰 header -->
           <div class="d-flex justify-content-between">
 
-            <!-- 리뷰 유저 & 별점 & 좋아요 -->
             <div class="container row ps-2" style="font-size: 1.5rem;">
-              <div class="col-9">
+              <!-- 리뷰 유저 & 별점 -->
+              <div class="col-8">
                 <div class="mb-0 d-flex">
                   <!-- user level -->
                   <div class="d-flex align-items-center" >
@@ -57,19 +57,24 @@
                   </div>
                   <span class="link" @click="goProfile(review.user.username)">{{ review.user.username }}</span>
                 </div>
-                
                 <star-rating class="mb-0" :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25"></star-rating>
               </div>
-              <div class="col-3 px-0 heart-size d-flex justify-content-center align-items-center">
-                <span v-if="liked" class="link"  @click="likesRivew">
-                  <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
-                </span>
-                <span v-else class="link"  @click="likesRivew">
-                  <font-awesome-icon :icon="['far', 'heart']"/>
-                </span>
-                <span class="ms-3" style="font-size: 1.5rem">
-                  {{ likedNum }}
-                </span>
+              <!-- 좋아요  & 작성시간-->
+              <div class="col-4 px-0">
+                <div class="d-flex justify-content-center" style="font-size: 1.3rem">
+                  {{ getTime(review.created_at) }}
+                </div>
+                <div class="heart-size d-flex justify-content-center align-items-center">
+                  <span v-if="liked" class="link"  @click="likesRivew">
+                    <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
+                  </span>
+                  <span v-else class="link"  @click="likesRivew">
+                    <font-awesome-icon :icon="['far', 'heart']"/>
+                  </span>
+                  <span class="ms-3" style="font-size: 1.5rem">
+                    {{ likedNum }}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -128,7 +133,7 @@
 
                 <button
                   v-if="loginUser.username === comment.author.username"
-                  class="my-comment-button-delete"
+                  class="my-comment-button-delete mb-3"
                   @click="deleteComments(comment.id)"
                 >
                   <font-awesome-icon :icon="['fas', 'times']" />
@@ -201,6 +206,9 @@ export default {
     },
   },
   methods: {
+    getTime: function (time) {
+      return time.slice(0, 10) + '  '+ time.slice(11, 16)
+    },
     level: function (point) {
       return Math.floor(point/100)
     },
@@ -349,7 +357,7 @@ export default {
 
 <style>
 .comment-content {
-  width: 630px;
+  width: 600px;
 }
 .textarea {
   border: 2px solid #6c757d;
@@ -458,7 +466,7 @@ box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(25
   border: 1px;
   border-color: #2f2f2f;
   color: white;
-  padding: 1px 10px;
+  padding: 1px 9px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
