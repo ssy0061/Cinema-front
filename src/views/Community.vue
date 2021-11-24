@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3" style="color: white">
-    <h1>추천</h1>
-    <div v-if="reviews" class="m-5">
+    <h1>Following's Review</h1>
+    <div v-if="reviews" class="mt-5">
       <review-card
         v-for="review in reviews" 
         :key="review.id"
