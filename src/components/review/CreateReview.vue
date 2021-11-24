@@ -64,7 +64,7 @@ export default {
       if (reviewItem.title) {
         axios({
           method: 'post',
-          url: `http://127.0.0.1:8000/reviews/movie/${this.movieId}/`,
+          url: `/reviews/movie/${this.movieId}/`,
           data: reviewItem,
           headers: this.setToken()
         })

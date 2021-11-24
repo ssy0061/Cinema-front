@@ -31,6 +31,9 @@ library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare, fasChevronRig
 
 // library.add(fabFontAwesome)
 
+import axios from 'axios'
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
+
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

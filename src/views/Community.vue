@@ -39,7 +39,7 @@ export default {
   created: function () {
     axios({
       methods: "GET",
-      url: "http://127.0.0.1:8000/reviews/recommend/",
+      url: "/reviews/recommend/",
       headers: this.setToken(),
     })
       .then((res) => {

@@ -19,7 +19,7 @@ export default new Vuex.Store({
       if (token) {
         axios({
           method: 'get',
-          url: 'http://127.0.0.1:8000/accounts/get/',
+          url: '/accounts/get/',
           headers: config
         })
         .then(res => {

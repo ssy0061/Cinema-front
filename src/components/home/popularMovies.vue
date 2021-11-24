@@ -84,7 +84,7 @@ export default {
   created: function () {
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8000/movies/popular/',
+      url: '/movies/popular/',
     })
     .then(res => {
       this.movies = res.data

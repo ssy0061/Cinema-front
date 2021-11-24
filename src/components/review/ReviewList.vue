@@ -41,7 +41,7 @@ export default {
       console.log(typeof(this.movieId))
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/reviews/movie/${this.movieId}/`,
+        url: `/reviews/movie/${this.movieId}/`,
         headers: this.setToken()
       })
       .then(res => {

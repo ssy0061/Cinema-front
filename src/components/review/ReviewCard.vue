@@ -164,7 +164,7 @@ export default {
     likesRivew: function () {
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/likes/`,
+        url: `/reviews/${this.review.id}/likes/`,
         headers: getToken()
       })
       .then(res => {
