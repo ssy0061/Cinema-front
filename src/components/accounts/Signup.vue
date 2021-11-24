@@ -5,7 +5,7 @@
         <h3 class="mb-0 pt-1">회원가입</h3>
       </div>
       <div class="card-body pb-0">
-        <div class="form-floating mb-3">
+        <div class="form-floating my-3">
           <input
             type="text"
             id="username"
@@ -27,7 +27,7 @@
           />
           <label for="password">비밀번호</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-2">
           <input
             type="password"
             id="passwordConfirmation"
@@ -42,7 +42,7 @@
         <p class="error-msg">{{ errMsg }}</p>
       </div>
       <div class="card-body pt-0">
-        <button @click="signup" class="my-button">회원가입</button>
+        <button @click="signup" class="my-button my-2">회원가입</button>
       </div>
     </div>
   </div>

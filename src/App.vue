@@ -2,20 +2,21 @@
   <div id="app">
     <div id="nav">
       <router-link to="/"><img class="logo" src="@/assets/images/logo4.png" alt=""></router-link>
-      <div v-if="chk" class="navi">
+      <div v-if="chk" class="navi" style="margin-left: 4rem;">
         <router-link to="/community/">Community</router-link> | 
         <router-link to="/recommend/">Recommend</router-link> | 
+        <router-link to="/shop/">Shop</router-link> |
         <router-link 
           :to="{
             name: 'Profile',
             params: { username: loginUser.username }
-          }">My Profile |
-        </router-link> 
-        <router-link to="/shop/">Shop</router-link>
+          }">My Profile
+        </router-link>
       </div>
-      <div>
+      <div class="me-3">
         <span v-if="chk">
-          <router-link to="#" @click.native="logout">Log Out</router-link>
+          <span style="margin-right: 5rem;">{{ loginUser.username }} 님 안녕하세요 </span>
+          <router-link to="#" @click.native="logout"><span class="mouse">Log Out</span></router-link>
         </span>
         <span v-else>
           <router-link to="/accounts/signup/">Signup</router-link> |
@@ -74,6 +75,12 @@ export default {
 
 
 <style>
+.mouse {
+  color: white;
+}
+.mouse:hover {
+  color: #42b983;
+}
 .page-title {
   margin: 40px 0;
   color: whitesmoke;

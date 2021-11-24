@@ -31,7 +31,7 @@
       <div class="card-body pt-0">
         <button @click="login" class="my-button">로그인</button>
         <div class="d-flex justify-content-end">
-          <span @click="goSignup" style="color: light" class="ms-1 link">
+          <span @click="goSignup" class="ms-1 link mouse2">
             회원가입
           </span>
         </div>
@@ -81,6 +81,12 @@ export default {
 </script>
 
 <style scoped>
+.mouse2 {
+  color: light;
+}
+.mouse2:hover {
+  color: #4caf50
+}
 .error-msg {
   color: #ff003e;
   text-align: left;
