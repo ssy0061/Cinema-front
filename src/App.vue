@@ -3,12 +3,13 @@
     <div id="nav">
       <router-link to="/"><img class="logo" src="@/assets/images/logo4.png" alt=""></router-link>
       <div v-if="chk" class="navi">
+        <router-link to="/community/">Community</router-link> | 
         <router-link to="/recommend/">Recommend</router-link> | 
         <router-link 
           :to="{
             name: 'Profile',
             params: { username: loginUser.username }
-          }">My Profile | 
+          }">My Profile |
         </router-link> 
         <router-link to="/shop/">Shop</router-link>
       </div>
