@@ -1,12 +1,15 @@
 <template>
-  <div class="reco2">
-    <h1>장르 점수판</h1>
+  <div>
+    <h1 class="page-title">Genre Score Board</h1>
     <div>
       <span class="genre-span" v-for="genre in genres" :key="genre.id"
         >{{ genre.genre_name }} {{ genre.score / 2 }}</span
       >
     </div>
-    <div class="row">
+    <div class="row" v-if="movies.length === 0">
+      <h1 style="color: #5e5e5e;">No Reviews</h1>
+    </div>
+    <div class="row" v-if="movies.length !== 0">
       <movie-card v-for="movie in movies" :key="movie.id" :movie="movie">
       </movie-card>
     </div>
@@ -56,10 +59,6 @@ export default {
 </script>
 
 <style>
-.reco2 {
-  color: white;
-  padding-top: 100px;
-}
 .genre-span {
   font-size: 25px;
   display: inline-block;

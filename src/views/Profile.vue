@@ -1,7 +1,7 @@
 <template>
   <div class="my-profile">
     <div v-if="user" class="my-3">
-      <h1>{{ user.username }}'s 프로필</h1>
+      <h1 class="page-title">{{ user.username }}'s Profile</h1>
 
       <div class="d-flex justify-content-center mt-3">
         <div style="text-align: left;">

@@ -24,9 +24,10 @@ import { faChevronRight as fasChevronRight } from '@fortawesome/free-solid-svg-i
 // regular
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
+import { faCommentAlt as farCommentAlt } from '@fortawesome/free-regular-svg-icons'
 // <font-awesome-icon :icon="['far', 'heart']" :style="{ color: 'white' }" />
 
-library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare, fasChevronRight)
+library.add(fasHeart, farHeart, fasEllipsisV, fasTimes, farSquare, fasChevronRight, farCommentAlt)
 
 // library.add(fabFontAwesome)
 

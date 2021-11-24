@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="margin: 40px 0; color: white">Shop</h1>
+    <h1 class="page-title">Shop</h1>
     <hr style="color: white" />
     <div class="shop-con">
       <div class="shop-item" v-for="item in items" :key="item.id">
@@ -109,5 +109,8 @@ export default {
 .shop-con {
   display: flex;
   flex-wrap: wrap;
+}
+.shop-item {
+  margin: 10px;
 }
 </style>
