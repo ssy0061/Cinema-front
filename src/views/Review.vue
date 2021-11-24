@@ -88,8 +88,8 @@
           <!-- 리뷰 body -->
           <hr class="mt-0">
           <div class="ps-2">
-            <h3 style="word-wrap:break-word;">{{ review.title }}</h3>
-            <h4 style="word-wrap:break-word;">{{ review.content }}</h4>
+            <h2 style="word-wrap:break-word;">{{ review.title }}</h2>
+            <h4 style="word-wrap:break-word; white-space:pre; color:gainsboro;">{{ review.content }}</h4>
           </div>
 
 
@@ -122,7 +122,7 @@
                     >
                     {{ comment.author.username }}</span> 
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="sm" :style="{ color: 'gray' }" />
-                    <span class="ms-3">{{ comment.content }}</span>
+                    <span class="ms-3 comment-content">{{ comment.content }}</span>
                   </span>
                 </div>
 
@@ -255,7 +255,8 @@ export default {
           this.inputTxt = ""
         })
         .catch((err) => {
-          console.log(err)
+          alert(err.response?.data?.content[0])
+          console.dir(err)
         })
     },
     deleteComments: function (id) {
@@ -347,6 +348,9 @@ export default {
 </script>
 
 <style>
+.comment-content {
+  width: 630px;
+}
 .textarea {
   border: 2px solid #6c757d;
   border-radius: 4px;
