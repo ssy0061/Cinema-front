@@ -1,7 +1,16 @@
 <template>
-  <!-- 영화카드(Community & Recommend & Profile) -->
-  <div class="d-flex justify-content-center align-self-start" :class="{'col-4': isProfile}">
-    <div class="row container justify-content-center">
+  <!-- 영화카드(Community & Profile) -->
+  <div 
+    class="d-flex justify-content-center mb-5"
+    :class="{
+      'col-4 align-self-start': isProfile,
+      'container-fluid mx-1': isCommunity,
+    }">
+    <div class="row container-fluid" 
+      :class="{
+        'justify-content-center': isProfile,
+        'px-0 justify-content-around': isCommunity
+      }">
       <!-- 영화카드 -->
       <div class="col-4 card text-white mb-4" style="width: 25rem;">
         <div class="card-header px-1">
@@ -45,19 +54,30 @@
         </div>
         <div class="card-body mb-3 review-card cursor-po" @click="goReview">
           <strong style="font-size: 1.3rem word-wrap:break-word;">{{ review.title }}</strong>
-          <p class="mb-0" style="word-wrap:break-word; white-space:pre; width: 350px;">{{ review.content }}</p>
+          <p class="mb-0" style="word-wrap:break-word; white-space:pre-wrap; width: 350px;">{{ review.content }}</p>
         </div>
       </div>
 
       <!-- Community -->
-      <div v-if="isCommunity" class="col-7">
-        api로 영화 불러오기
+      <div v-if="isCommunity" class="col-7" style="height: 400px; magin-left: 100px">
+        <button class="similar-button mb-3" @click="getSimilar">비슷한 콘텐츠</button>
+        <div class="row">
+          <div
+            class="col-4"
+            v-for="movie in randomSimilar"
+            :key="movie.id"
+          >
+            <img :src="getSimilarUrl(movie)" alt="포스터" style="width: 13rem">
+            <p>{{ movie.title }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 import axios from 'axios'
 import getToken from '@/util/getToken.js'
 import { mapState } from 'vuex'
@@ -77,13 +97,37 @@ export default {
       chk: null,
       isCommunity: null,
       isProfile: null,
-      isRecommend: null,
+      similarMovies: null,
+      randomSimilar: null,
     }
   },
   components: {
     StarRating,
   },
   methods: {
+    getSimilarUrl: function(movie) {
+      return `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+    },
+    getRandom: function () {
+      this.randomSimilar = _.sampleSize(this.similarMovies, 3)
+    },
+    getSimilar: function () {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${this.review.movie.id}/similar`,
+        params: {
+          api_key: '01558afb166c2eadee2e5d5648921e61',
+          language: 'ko-KR',
+        }
+      })
+      .then(res => {
+        this.similarMovies = res.data.results
+        this.getRandom()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
     level: function (point) {
       return Math.floor(point/100)
     },
@@ -130,19 +174,17 @@ export default {
     ])
   },
   created: function () {
-    // recommend.vue OR profile.vue 확인
+    // route.name 확인
     if (this.$route.name === 'Community') {
       this.isCommunity = true
-      this.isRecommend = false
       this.isProfile = false
+
+      // tmdb api로 similar 영화가져오기
+      this.getSimilar()
+
     } else if (this.$route.name === 'Profile') {
       this.isCommunity = false
-      this.isRecommend = false
       this.isProfile = true
-    } else if (this.$route.name === 'Recommend') {
-      this.isCommunity = false
-      this.isRecommend = true
-      this.isProfile = false
     }
 
 
@@ -152,6 +194,7 @@ export default {
         } else {
           this.chk = false
         }
+
     this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.backdrop_path}`
     // this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.review.movie.poster_path}`
     const data = this.review.movie.release_date.split('-')
@@ -180,5 +223,23 @@ export default {
   border: 1px solid #6c757d; 
   padding: 6px;
   border-radius: 5px;
+}
+.similar-button {
+  background-color: light;
+  border: 1px;
+  border-color: light;
+  color: #2f2f2f;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.3rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+.similar-button:hover {
+  background-color: #2444af;
+  color: white;
 }
 </style>

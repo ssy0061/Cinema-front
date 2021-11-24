@@ -31,7 +31,7 @@
         
         <div class="card-body cursor-po px-4" style="text-align: left" @click="goReview">
           <strong class="card-title mb-0" style="font-size: 1.6rem; word-wrap:break-word;">{{ review.title }}</strong>
-          <p class="card-text mb-0" style="font-size: 1.4rem; word-wrap:break-word; white-space:pre;">{{ review.content }}</p>
+          <p class="card-text mb-0" style="font-size: 1.4rem; word-wrap:break-word; white-space:pre-wrap;">{{ review.content }}</p>
         </div>
       </div>
 
