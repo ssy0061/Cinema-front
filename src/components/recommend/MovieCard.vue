@@ -1,6 +1,7 @@
 <template>
   <div class="col-3" style="margin: 10px 0">
     <img
+      class="link"
       :src="posterUrl"
       :alt="movie.title"
       style="width: 250px"

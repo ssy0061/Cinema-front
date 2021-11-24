@@ -85,8 +85,11 @@ export default {
       })
       .then(res => {
         const getVideoKey = function () {
+          // console.log(res.data.results)
           for (let video of res.data.results) {
             if (video.type === "Trailer") {
+              return `https://www.youtube.com/embed/${video.key}`
+            } else if (video.type === "Teaser") {
               return `https://www.youtube.com/embed/${video.key}`
             }
           }
