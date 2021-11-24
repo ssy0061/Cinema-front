@@ -89,7 +89,7 @@
           <hr class="mt-0">
           <div class="ps-2">
             <h2 style="word-wrap:break-word;">{{ review.title }}</h2>
-            <h4 style="word-wrap:break-word; white-space:pre; color:gainsboro;">{{ review.content }}</h4>
+            <h4 style="word-wrap:break-word; white-space:pre-wrap; color:gainsboro;">{{ review.content }}</h4>
           </div>
 
 
