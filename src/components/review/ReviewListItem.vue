@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="card border-secondary border-2 mb-3 text-white">
         <div class="card-header border-secondary border-1">
-          <div class="container row" style="font-size: 1.5rem;">
+          <div class="container row px-1" style="font-size: 1.5rem;">
             <div class="col-9">
               <div class="link mb-0 d-flex" @click="goProfile">
                 <!-- user level -->
@@ -29,9 +29,9 @@
           </div>
         </div>
         
-        <div class="card-body cursor-po" style="font-size: 1.4rem;" @click="goReview">
-          <p class="card-title mb-0">{{ review.title }}</p>
-          <p class="card-text mb-0"></p>
+        <div class="card-body cursor-po px-4" style="text-align: left" @click="goReview">
+          <strong class="card-title mb-0" style="font-size: 1.6rem; word-wrap:break-word;">{{ review.title }}</strong>
+          <p class="card-text mb-0" style="font-size: 1.4rem; word-wrap:break-word; white-space:pre;">{{ review.content }}</p>
         </div>
       </div>
 
