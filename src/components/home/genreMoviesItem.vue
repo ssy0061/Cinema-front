@@ -52,7 +52,7 @@ export default {
   created: function () {
     axios({
       method: 'get',
-      url: `http://127.0.0.1:8000/movies/genres/${this.genre.id}/`
+      url: `/movies/genres/${this.genre.id}/`
     })
     .then(res => {
       this.movies = res.data

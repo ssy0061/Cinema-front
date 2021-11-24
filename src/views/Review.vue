@@ -232,7 +232,7 @@ export default {
     likesRivew: function () {
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/likes/`,
+        url: `/reviews/${this.review.id}/likes/`,
         headers: getToken()
       })
       .then(res => {
@@ -251,7 +251,7 @@ export default {
     createComments: function () {
       axios({
         method: "POST",
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/comments/`,
+        url: `/reviews/${this.review.id}/comments/`,
         headers: getToken(),
         data: {
           content: this.inputTxt,
@@ -270,7 +270,7 @@ export default {
     deleteComments: function (id) {
       axios({
         method: 'delete',
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/comments/${id}`,
+        url: `/reviews/${this.review.id}/comments/${id}`,
         headers: getToken(),
       })
       .then(res => {
@@ -284,7 +284,7 @@ export default {
     reviewDelete: function () {
       axios({
         method: "DELETE",
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/`,
+        url: `/reviews/${this.review.id}/`,
         headers: getToken(),
       })
         .then(() => {
@@ -303,7 +303,7 @@ export default {
     reviewEditSubmit: function () {
       axios({
         method: "PUT",
-        url: `http://127.0.0.1:8000/reviews/${this.review.id}/`,
+        url: `/reviews/${this.review.id}/`,
         headers: getToken(),
         data: {
           title: this.editTitle,
@@ -329,7 +329,7 @@ export default {
       const reviewId = this.$route.params.reviewId
       axios({
         method: "GET",
-        url: `http://127.0.0.1:8000/reviews/${reviewId}/`,
+        url: `/reviews/${reviewId}/`,
         headers: getToken(),
       })
         .then((res) => {

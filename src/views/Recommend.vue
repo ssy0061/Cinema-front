@@ -6,10 +6,10 @@
         >{{ genre.genre_name }} {{ genre.score / 2 }}</span
       >
     </div>
-    <div class="row" v-if="movies.length === 0">
+    <div class="row" v-if="movies && movies.length === 0">
       <h1 style="color: #5e5e5e;">No Reviews</h1>
     </div>
-    <div class="row" v-if="movies.length !== 0">
+    <div class="row" v-if="movies && movies.length !== 0">
       <movie-card v-for="movie in movies" :key="movie.id" :movie="movie">
       </movie-card>
     </div>
@@ -41,7 +41,7 @@ export default {
   created: function () {
     axios({
       methods: "GET",
-      url: "http://127.0.0.1:8000/reviews/recommend2/",
+      url: "/reviews/recommend2/",
       headers: getToken(),
     })
       .then((res) => {

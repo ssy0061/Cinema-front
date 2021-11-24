@@ -63,7 +63,7 @@ export default {
       chk: null,
       user: null,
       reviews: null,
-      // url: `http://127.0.0.1:8000/movies/${this.reviews.movie.poster_path}/`
+      // url: `/movies/${this.reviews.movie.poster_path}/`
     }
   },
   computed: {
@@ -89,7 +89,7 @@ export default {
 
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/accounts/${this.user.id}/follow/`,
+        url: `/accounts/${this.user.id}/follow/`,
         headers: config
       })
       .then(() => {
@@ -118,7 +118,7 @@ export default {
 
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/accounts/${username}/`,
+        url: `/accounts/${username}/`,
         headers: this.setToken()
       })
       .then(res => {
@@ -141,7 +141,7 @@ export default {
       // profile 유저의 리뷰(영화) 정보 가져오기
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/reviews/user/${this.user.id}/`,
+        url: `/reviews/user/${this.user.id}/`,
         headers: this.setToken()
       })
       .then(res => {
