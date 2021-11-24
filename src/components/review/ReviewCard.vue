@@ -9,14 +9,16 @@
     <div class="row container-fluid" 
       :class="{
         'justify-content-center': isProfile,
-        'px-0 justify-content-around': isCommunity
+        'px-0 justify-content-evenly': isCommunity
       }">
       <!-- 영화카드 -->
       <div class="col-4 card text-white mb-4" style="width: 25rem;">
         <div class="card-header px-1">
-          <span :class="[{'align-items-center': isProfile}, {'d-flex': isProfile}]">
+          <!-- <span :class="[{'align-items-center': isProfile}, {'d-flex': isProfile}]"> -->
+          <span>
 
-            <span v-if="!isProfile" class="mb-0 d-flex" style="font-size: 1.5rem">
+            <!-- <span v-if="!isProfile" class="mb-0 d-flex" style="font-size: 1.5rem"> -->
+            <span class="mb-0 d-flex" style="font-size: 1.5rem">
               <!-- user level -->
               <span class="link d-flex align-items-center" @click="goProfile(review.user.username)">
                 <span 
@@ -29,8 +31,8 @@
 
             <star-rating :rating="review.rated/2" :read-only="true" :increment="0.01" :star-size="25" :show-rating="false"></star-rating>
           </span>
-          <span class="d-flex align-items-center">
-            <span @click="likesRivew" class="cursor-po pe-2" style="font-size: 2rem">
+          <span class="d-flex align-items-center mt-2">
+            <span @click="likesRivew" class="cursor-po pe-2" style="font-size: 1.8rem">
               <span v-if="chk">
                 <font-awesome-icon :icon="['fas', 'heart']" :style="{ color: 'red' }"/>
               </span>
@@ -41,7 +43,14 @@
             <span style="font-size: 1.5rem">
               {{likes_cnt}}
             </span>
+              <span class="comments-icon cursor-po" @click="goReview">
+                <font-awesome-icon :icon="['far', 'comment-alt']" style="font-size: 1.7rem" />
+              </span>
+              <span style="font-size: 1.5rem">
+                {{review.comment_set.length}}
+              </span>
           </span>
+          <span class="review-create-time">{{getTime(review.created_at)}}</span>
         </div>
         <img :src="posterUrl" alt="포스터" class="card-img-top cursor-po" @click="goDetail(review.movie.id)">
         <div class="card-body">
@@ -49,17 +58,18 @@
             <span 
               @click="goDetail(review.movie.id)"
               class="cursor-po"
+              style="font-size: 1.2rem"
             >{{ review.movie.title }}
             </span></h4>
         </div>
         <div class="card-body mb-3 review-card cursor-po" @click="goReview">
-          <strong style="font-size: 1.3rem word-wrap:break-word;">{{ review.title }}</strong>
+          <strong style="font-size: 1.5rem; word-wrap:break-word;">{{ review.title }}</strong>
           <p class="mb-0" style="word-wrap:break-word; white-space:pre-wrap; width: 350px;">{{ review.content }}</p>
         </div>
       </div>
 
       <!-- Community -->
-      <div v-if="isCommunity" class="col-7" style="height: 400px; magin-left: 100px">
+      <div v-if="isCommunity" class="col-6" style="height: 400px; magin-left: 100px">
         <button class="similar-button mb-3" @click="getSimilar">비슷한 콘텐츠</button>
         <div class="row">
           <div
@@ -67,7 +77,7 @@
             v-for="movie in randomSimilar"
             :key="movie.id"
           >
-            <img :src="getSimilarUrl(movie)" alt="포스터" style="width: 13rem">
+            <img :src="getSimilarUrl(movie)" alt="포스터" style="width: 13rem; height: 307px;">
             <p>{{ movie.title }}</p>
           </div>
         </div>
@@ -105,6 +115,9 @@ export default {
     StarRating,
   },
   methods: {
+    getTime: function (time) {
+      return time.slice(0, 10) + '  '+ time.slice(11, 16)
+    },
     getSimilarUrl: function(movie) {
       return `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
     },
@@ -241,5 +254,15 @@ export default {
 .similar-button:hover {
   background-color: #2444af;
   color: white;
+}
+.comments-icon {
+  padding: 1px 10px 0;
+}
+.review-create-time {
+  font-size: 0.75rem;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: gray;
 }
 </style>

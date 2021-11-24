@@ -74,6 +74,10 @@ export default {
 
 
 <style>
+.page-title {
+  margin: 40px 0;
+  color: whitesmoke;
+}
 .user-level {
   font-weight: bold;
   border: 1px solid #cfcfcf;

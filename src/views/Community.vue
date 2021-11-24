@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-3" style="color: white">
-    <h1>Following's Review</h1>
+  <div style="color: white">
+    <h1 class="page-title">Following's Review</h1>
     <div v-if="reviews" class="mt-5">
       <review-card
         v-for="review in reviews" 
@@ -9,6 +9,7 @@
       >
       </review-card>
     </div>
+    <h1 v-if="reviews && reviews.length === 0" style="color: #5e5e5e;">No Followers</h1>
   </div>
 </template>
 
