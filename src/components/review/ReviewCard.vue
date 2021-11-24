@@ -1,10 +1,10 @@
 <template>
+  <!-- 영화카드(Community & Recommend & Profile) -->
   <div class="d-flex justify-content-center align-self-start" :class="{'col-4': isProfile}">
-    <!-- 영화카드 + 추천(recommend) -->
     <div class="row container justify-content-center">
       <!-- 영화카드 -->
       <div class="col-4 card text-white mb-4" style="width: 25rem;">
-        <div class="card-header">
+        <div class="card-header px-1">
           <span :class="[{'align-items-center': isProfile}, {'d-flex': isProfile}]">
 
             <span v-if="!isProfile" class="mb-0 d-flex" style="font-size: 1.5rem">
@@ -44,12 +44,12 @@
             </span></h4>
         </div>
         <div class="card-body mb-3 review-card cursor-po" @click="goReview">
-          <strong style="font-size: 1.3rem">{{ review.title }}</strong>
-          <p class="mb-0">{{ review.content }}</p>
+          <strong style="font-size: 1.3rem word-wrap:break-word;">{{ review.title }}</strong>
+          <p class="mb-0" style="word-wrap:break-word; white-space:pre; width: 350px;">{{ review.content }}</p>
         </div>
       </div>
 
-      <!-- 추천 -->
+      <!-- Community -->
       <div v-if="isCommunity" class="col-7">
         api로 영화 불러오기
       </div>

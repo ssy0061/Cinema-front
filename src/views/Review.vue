@@ -141,7 +141,7 @@
               </div>
 
               <!-- 댓글 작성 -->
-              <div class="d-flex justify-content-around mt-3">
+              <div class="d-flex justify-content-around mt-2">
                 <input
                   class="input-text"
                   style="width: 600px"
