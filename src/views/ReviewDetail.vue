@@ -381,7 +381,6 @@ export default {
 box-shadow: 5px 5px 5px 0px rgba(255,255,255,.1), inset 4px 4px 15px 0px rgba(255,255,255,.1), 3px 10px 18px 8px rgba(0,0,0,0.65);
 }
 .wrap-dropdown {
-  width: 100%;
   min-width: 0;
   white-space: normal;
 }
