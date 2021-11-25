@@ -45,6 +45,11 @@ const routes = [
     component: Recommend
   },
   {
+    path: '/shop/goods/',
+    name: 'Shop',
+    component: Shop
+  },
+  {
     path: '/:username/',
     name: 'Profile',
     component: Profile
@@ -54,11 +59,6 @@ const routes = [
     name: 'ReviewDetail',
     component: ReviewDetail
   },
-  {
-    path: '/shop/',
-    name: 'Shop',
-    component: Shop
-  }
 ]
 
 const router = new VueRouter({
