@@ -78,7 +78,7 @@ export default {
       this.$router.push({ name: 'Profile', params: { username: `${this.review.user.username}`}})
     },
     goReview: function () {
-      this.$router.push({ name: 'Review', params: { reviewId: `${this.review.id}`}})
+      this.$router.push({ name: 'ReviewDetail', params: { reviewId: `${this.review.id}`}})
     },
     getLiked: function () {
       if (this.review.like_users.find(id => this.loginUser.id === id)) {
