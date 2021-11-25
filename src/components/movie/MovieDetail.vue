@@ -64,7 +64,7 @@ export default {
         url: `/movies/${this.movieId}/`
       })
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.movie = res.data
         this.posterUrl = `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
         const data = this.movie.release_date.split('-')

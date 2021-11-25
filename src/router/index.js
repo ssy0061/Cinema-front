@@ -5,7 +5,7 @@ import Movie from '../views/Movie.vue'
 import Community from '../views/Community.vue'
 import Recommend from '../views/Recommend.vue'
 import Profile from '../views/Profile.vue'
-import Review from '../views/Review.vue'
+import ReviewDetail from '../views/ReviewDetail.vue'
 import Shop from '../views/Shop.vue'
 
 import Signup from '../components/accounts/Signup.vue'
@@ -51,8 +51,8 @@ const routes = [
   },
   {
     path: '/review/:reviewId/',
-    name: 'Review',
-    component: Review
+    name: 'ReviewDetail',
+    component: ReviewDetail
   },
   {
     path: '/shop/',

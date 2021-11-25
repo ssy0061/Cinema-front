@@ -159,7 +159,7 @@ export default {
       this.$router.push({ name: 'Movie', params: { movieId: id }})
     },
     goReview: function () {
-      this.$router.push({ name: 'Review', params: { reviewId: `${this.review.id}`}})
+      this.$router.push({ name: 'ReviewDetail', params: { reviewId: `${this.review.id}`}})
     },
     likesRivew: function () {
       axios({
