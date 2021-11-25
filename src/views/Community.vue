@@ -9,7 +9,7 @@
       >
       </review-card>
     </div>
-    <h1 v-if="reviews && reviews.length === 0" style="color: #5e5e5e;">No Followers</h1>
+    <h1 v-if="reviews && reviews.length === 0" style="color: #5e5e5e;">No Followings</h1>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
   created: function () {
     axios({
       methods: "GET",
-      url: "/reviews/recommend/",
+      url: "/reviews/community/",
       headers: this.setToken(),
     })
       .then((res) => {

@@ -134,7 +134,12 @@ export default {
           this.getUserReview()
       })
       .catch(err => {
-        console.log(err)
+        console.dir(err)
+        if (err.response.data.code === 'token_not_valid') {
+          this.$router.push({ name: 'Login' })
+        }else if (err.response.status === 404) {
+          alert('해당유저가 없습니다.')
+        }
       })
     },
     getUserReview: function () {

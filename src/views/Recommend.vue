@@ -41,7 +41,7 @@ export default {
   created: function () {
     axios({
       methods: "GET",
-      url: "/reviews/recommend2/",
+      url: "/reviews/recommend/",
       headers: getToken(),
     })
       .then((res) => {
